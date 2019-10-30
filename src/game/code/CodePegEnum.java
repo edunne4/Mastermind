@@ -14,6 +14,8 @@
 
 package game.code;
 
+import javafx.scene.paint.Color;
+
 /**
  * This enum represents all possible code pegs that could be played in the game. It
  * also includes a NONE value, to allow the {@link CodePegHolder} to have an empty place
@@ -22,18 +24,24 @@ package game.code;
  * @author brk009
  */
 public enum CodePegEnum {
-    NONE("-"),
-    RED("1"),
-    GREEN("2"),
-    YELLOW("3"),
-    BLUE("4"),
-    CYAN("5"),
-    ORANGE("6");
+    NONE("-", Color.BLACK),
+    RED("1", Color.RED),
+    GREEN("2", Color.GREEN),
+    YELLOW("3", Color.YELLOW),
+    BLUE("4", Color.BLUE),
+    CYAN("5", Color.CYAN),
+    ORANGE("6", Color.ORANGE);
 
     private String symbol;
+    private Color color;
 
-    private CodePegEnum(String symbol) {
+    private CodePegEnum(String symbol, Color color) {
         this.symbol = symbol;
+        this.color = color;
+    }
+
+    public Color getColor() {
+        return color;
     }
 
     /**
