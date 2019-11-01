@@ -6,31 +6,33 @@
  * Name: Ethan Dunne
  * Section: 11am
  * Date: 10/31/19
- * Time: 10:58 PM
+ * Time: 11:04 PM
  *
  * Project: csci205_hw02
  * Package: GUI.board
- * Class: CodePegHolderView
+ * Class: ScorePegHolderView
  *
  * Description:
  *
  * ****************************************
  */
-package GUI.board;
+package GUI.View;
 
-import game.code.CodePegEnum;
+import game.score.ScorePegEnum;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-public class CodePegHolderView extends StackPane {
+public class ScorePegHolderView extends StackPane {
 
-    private static final double INIT_RADIUS = 10;
+    private static final double INIT_RADIUS = 5;
 
-    private CodePegView currentPeg;
+    ScorePegView currentPeg;
 
-
-    public CodePegHolderView() {
+    /**
+     * Creates an empty instance of Circle.
+     */
+    public ScorePegHolderView() {
         super();
         //create empty black circle
         this.getChildren().add(new Circle(INIT_RADIUS, Color.BLACK));
@@ -40,10 +42,10 @@ public class CodePegHolderView extends StackPane {
      * Create a peg holder with a Code peg in it
      * @param newPeg - the peg that should be in the peg holder
      */
-    public CodePegHolderView(CodePegEnum newPeg) {
+    public ScorePegHolderView(ScorePegEnum newPeg) {
         this();
         //TODO - change this to its own function for adding a peg to this holder
-        this.currentPeg = new CodePegView(newPeg);
+        this.currentPeg = new ScorePegView(newPeg);
         this.getChildren().add(this.currentPeg);
     }
 }

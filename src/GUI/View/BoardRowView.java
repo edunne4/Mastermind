@@ -16,13 +16,11 @@
  *
  * ****************************************
  */
-package GUI.board;
+package GUI.View;
 
 import game.board.RowOnBoard;
 import game.code.Code;
-import game.code.CodePegEnum;
 import game.score.Score;
-import game.score.ScorePegEnum;
 import javafx.scene.layout.HBox;
 
 public class BoardRowView extends HBox {

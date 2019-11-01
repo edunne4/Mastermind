@@ -19,8 +19,8 @@
  */
 package GUI;
 
-import GUI.board.BoardRowView;
-import GUI.board.CodePegView;
+import GUI.View.BoardRowView;
+import GUI.View.CodePegView;
 import game.code.CodePegEnum;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -35,6 +35,8 @@ public class MastermindView {
     private final MastermindModel theModel;
 
     private BorderPane root;
+    /** The peg objects that can be clicked on for inputting pegs */
+    private VBox pegOptions;
 
     public MastermindView() {
         this.theModel = new MastermindModel();
@@ -77,42 +79,17 @@ public class MastermindView {
         leftPane.getChildren().add(labels);
 
 
-        //create board of rows
+        //create board of rows ****************************
         VBox rowsView = new VBox(20);
         rowsView.setAlignment(Pos.CENTER);
 
         leftPane.getChildren().add(rowsView);
 
         for (int i = 0; i < 12; i++) {
-//            HBox row = new HBox(20);
-//            for (int j = 0; j < 4; j++) {
-//                row.getChildren().add(new PlayingPeg(Color.GREEN));
-//            }
             rowsView.getChildren().add(new BoardRowView());
         }
         this.root.setLeft(leftPane);
 
-
-//        //add scoring rows
-//        VBox leftPane = new VBox(20);
-//        leftPane.setAlignment(Pos.CENTER);
-//        Label scoreLabel = new Label("SCORE");
-//        //scoreLabel.setAlignment(Pos.CENTER);
-//        leftPane.getChildren().add(scoreLabel);
-//        VBox scoreRowsView = new VBox(20);
-//        //add rows
-//        for (int i = 0; i < 12; i++) {
-//            HBox scoreRow = new HBox(20);
-//            for (int j = 0; j < 4; j++) {
-//                //TODO - change to add new empty peg
-//                scoreRow.getChildren().add(new PlayingPeg(Color.BLACK));
-//            }
-//            scoreRowsView.getChildren().add(scoreRow);
-//        }
-//        leftPane.getChildren().add(scoreRowsView);
-//        this.root.setLeft(leftPane);
-//        this.root.setMargin(root.getLeft(), new Insets(20));
-//        //root.setAlignment(root.getLeft(), Pos.CENTER);
 
 
         //do right pane (playing peg options)
@@ -120,12 +97,13 @@ public class MastermindView {
         rightPane.setAlignment(Pos.CENTER);
         rightPane.getChildren().add(new Label("PLAYING PEGS"));
 
-        VBox pegOptions = new VBox(20);
+        this.pegOptions = new VBox(20);
         pegOptions.setAlignment(Pos.CENTER);
 
         //add all peg options to the right side
         for(CodePegEnum peg : CodePegEnum.values()){
             if(peg != CodePegEnum.NONE) {
+                //TODO maybe these should not be CodePegView, but some selectable subclass
                 pegOptions.getChildren().add(new CodePegView(peg));
             }
         }
@@ -137,5 +115,9 @@ public class MastermindView {
 
     public BorderPane getRoot() {
         return root;
+    }
+
+    public VBox getPegOptions() {
+        return pegOptions;
     }
 }
