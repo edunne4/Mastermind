@@ -44,8 +44,17 @@ public class ScorePegHolderView extends StackPane {
      */
     public ScorePegHolderView(ScorePegEnum newPeg) {
         this();
-        //TODO - change this to its own function for adding a peg to this holder
-        this.currentPeg = new ScorePegView(newPeg);
-        this.getChildren().add(this.currentPeg);
+        setCurrentPeg(newPeg);
+    }
+
+    public void setCurrentPeg(ScorePegEnum newPeg){
+        setCurrentPeg(new ScorePegView(newPeg));
+    }
+    public void setCurrentPeg(ScorePegView newPegView) {
+        this.currentPeg = newPegView;
+        //return currentPeg.getPegType(); //TODO - return previous peg held here
+        if(newPegView.getType() != ScorePegEnum.NONE) { // If there is a non-none peg here, show it
+            this.getChildren().add(this.currentPeg);
+        }
     }
 }

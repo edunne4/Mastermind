@@ -24,7 +24,7 @@ private MastermindView theView;
     @Override
     public void start(Stage primaryStage) {
 
-        this.theController = new MastermindController();
+        this.theController = new MastermindController(this.theView);
 
         Scene scene = new Scene(theView.getRoot());
 

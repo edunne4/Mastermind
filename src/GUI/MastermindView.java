@@ -22,13 +22,18 @@ package GUI;
 import GUI.View.BoardRowView;
 import GUI.View.CodePegView;
 import game.code.CodePegEnum;
+import game.code.CodePegHolder;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MastermindView {
 
@@ -36,7 +41,7 @@ public class MastermindView {
 
     private BorderPane root;
     /** The peg objects that can be clicked on for inputting pegs */
-    private VBox pegOptions;
+    private List<CodePegView> pegOptions = new ArrayList<>();
 
     public MastermindView() {
         this.theModel = new MastermindModel();
@@ -97,17 +102,21 @@ public class MastermindView {
         rightPane.setAlignment(Pos.CENTER);
         rightPane.getChildren().add(new Label("PLAYING PEGS"));
 
-        this.pegOptions = new VBox(20);
-        pegOptions.setAlignment(Pos.CENTER);
+        VBox pegOptionsBox = new VBox(20);
+        pegOptionsBox.setAlignment(Pos.CENTER);
 
         //add all peg options to the right side
         for(CodePegEnum peg : CodePegEnum.values()){
             if(peg != CodePegEnum.NONE) {
                 //TODO maybe these should not be CodePegView, but some selectable subclass
-                pegOptions.getChildren().add(new CodePegView(peg));
+                CodePegView pegView = new CodePegView(peg);
+                //add to scene graph
+                pegOptionsBox.getChildren().add(pegView);
+                //but also store it so that adding event handlers is easy
+                pegOptions.add(pegView);
             }
         }
-        rightPane.getChildren().add(pegOptions);
+        rightPane.getChildren().add(pegOptionsBox);
         root.setRight(rightPane);
 
 
@@ -117,7 +126,7 @@ public class MastermindView {
         return root;
     }
 
-    public VBox getPegOptions() {
+    public List<CodePegView> getPegOptions() {
         return pegOptions;
     }
 }

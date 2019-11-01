@@ -42,8 +42,24 @@ public class CodePegHolderView extends StackPane {
      */
     public CodePegHolderView(CodePegEnum newPeg) {
         this();
-        //TODO - change this to its own function for adding a peg to this holder
-        this.currentPeg = new CodePegView(newPeg);
-        this.getChildren().add(this.currentPeg);
+        setCurrentPeg(newPeg);
+    }
+
+    public void setCurrentPeg(CodePegEnum newPeg){
+        setCurrentPeg(new CodePegView(newPeg));
+    }
+    //TODO maybe get rid of this overload and just have the one that accepts the enum as parameter
+    public void setCurrentPeg(CodePegView newPegView) {
+        this.currentPeg = newPegView;
+        //return currentPeg.getPegType(); //TODO - return previous peg held here
+
+        //this.getChildren().clear(); // get rid of any previous children
+        if(newPegView.getPegType() != CodePegEnum.NONE) { // If there is a non-none peg here, show it
+            this.getChildren().add(this.currentPeg);
+        }
+    }
+
+    public CodePegView getCurrentPeg() {
+        return currentPeg;
     }
 }

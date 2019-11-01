@@ -25,6 +25,7 @@ import javafx.scene.shape.Circle;
 
 public class ScorePegView extends Circle {
     private static final double INIT_RADIUS = 10;
+    private ScorePegEnum pegType = ScorePegEnum.NONE;
 
     public ScorePegView(ScorePegEnum scorePeg) {
         super(INIT_RADIUS,scorePeg.getColor());
@@ -40,5 +41,9 @@ public class ScorePegView extends Circle {
         ds.setOffsetY(4.0);
         ds.setColor(Color.BLACK);
         this.setEffect(ds);
+    }
+
+    public ScorePegEnum getType() {
+        return pegType;
     }
 }
