@@ -26,8 +26,8 @@ import javafx.scene.layout.HBox;
 public class BoardRowView extends HBox {
 
     public BoardRowView() {
-        HBox scoreRow = new HBox(20);
-        HBox pegRow = new HBox(20);
+        HBox scoreRow = new HBox(10);
+        HBox pegRow = new HBox(30);
         this.setSpacing(20);
 
         //create empty scoring peg holders
@@ -44,8 +44,8 @@ public class BoardRowView extends HBox {
     }
 
     public BoardRowView(RowOnBoard row) {
-        HBox scoreRow = new HBox(20);
-        HBox pegRow = new HBox(20);
+        HBox scoreRow = new HBox(10);
+        HBox pegRow = new HBox(30);
         this.setSpacing(20);
 
 
@@ -54,6 +54,7 @@ public class BoardRowView extends HBox {
         for (int i = 0; i < 4; i++) {
             scoreRow.getChildren().add(new ScorePegView(score.getScoringPegAt(i)));
         }
+
 
         Code code = row.getCode();
         //create empty pegs
