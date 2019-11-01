@@ -19,14 +19,14 @@
  */
 package GUI;
 
+import GUI.board.BoardRowView;
+import GUI.board.CodePegView;
 import game.code.CodePegEnum;
-import game.players.CodeMaker;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -59,48 +59,60 @@ public class MastermindView {
         root.setMargin(root.getTop(), new Insets(15));
 
 
-        //center piece
-        VBox centerPane = new VBox(20);
-        centerPane.setAlignment(Pos.CENTER);
-
-        //create board
-        VBox rowsView = new VBox(20);
-        //create secret code hider
-        Label secretCodeLabel = new Label("SECRET CODE");
-//        secretCodeLabel.setAlignment(Pos.CENTER);
-        centerPane.getChildren().add(secretCodeLabel);
-        centerPane.getChildren().add(rowsView);
-
-        for (int i = 0; i < 12; i++) {
-            HBox row = new HBox(20);
-            for (int j = 0; j < 8; j++) {
-                row.getChildren().add(new PlayingPeg(Color.GREEN));
-            }
-            rowsView.getChildren().add(row);
-        }
-        this.root.setCenter(centerPane);
-
-
-        //add scoring rows
+        //left piece (board)
         VBox leftPane = new VBox(20);
         leftPane.setAlignment(Pos.CENTER);
+
+        //create labels *****************************
+        HBox labels = new HBox(20);
+        labels.setAlignment(Pos.CENTER);
         Label scoreLabel = new Label("SCORE");
         //scoreLabel.setAlignment(Pos.CENTER);
-        leftPane.getChildren().add(scoreLabel);
-        VBox scoreRowsView = new VBox(20);
-        //add rows
+        labels.getChildren().add(scoreLabel);
+        //create secret code hider TODO - this should be a stack a stack pane with the code behind it
+        Label secretCodeLabel = new Label("SECRET CODE");
+        //secretCodeLabel.setAlignment(Pos.CENTER);
+        labels.getChildren().add(secretCodeLabel);
+
+        leftPane.getChildren().add(labels);
+
+
+        //create board of rows
+        VBox rowsView = new VBox(20);
+        rowsView.setAlignment(Pos.CENTER);
+
+        leftPane.getChildren().add(rowsView);
+
         for (int i = 0; i < 12; i++) {
-            HBox scoreRow = new HBox(20);
-            for (int j = 0; j < 4; j++) {
-                //TODO - change to add new empty peg
-                scoreRow.getChildren().add(new PlayingPeg(Color.BLACK));
-            }
-            scoreRowsView.getChildren().add(scoreRow);
+//            HBox row = new HBox(20);
+//            for (int j = 0; j < 4; j++) {
+//                row.getChildren().add(new PlayingPeg(Color.GREEN));
+//            }
+            rowsView.getChildren().add(new BoardRowView());
         }
-        leftPane.getChildren().add(scoreRowsView);
         this.root.setLeft(leftPane);
-        this.root.setMargin(root.getLeft(), new Insets(20));
-        //root.setAlignment(root.getLeft(), Pos.CENTER);
+
+
+//        //add scoring rows
+//        VBox leftPane = new VBox(20);
+//        leftPane.setAlignment(Pos.CENTER);
+//        Label scoreLabel = new Label("SCORE");
+//        //scoreLabel.setAlignment(Pos.CENTER);
+//        leftPane.getChildren().add(scoreLabel);
+//        VBox scoreRowsView = new VBox(20);
+//        //add rows
+//        for (int i = 0; i < 12; i++) {
+//            HBox scoreRow = new HBox(20);
+//            for (int j = 0; j < 4; j++) {
+//                //TODO - change to add new empty peg
+//                scoreRow.getChildren().add(new PlayingPeg(Color.BLACK));
+//            }
+//            scoreRowsView.getChildren().add(scoreRow);
+//        }
+//        leftPane.getChildren().add(scoreRowsView);
+//        this.root.setLeft(leftPane);
+//        this.root.setMargin(root.getLeft(), new Insets(20));
+//        //root.setAlignment(root.getLeft(), Pos.CENTER);
 
 
         //do right pane (playing peg options)
@@ -109,10 +121,16 @@ public class MastermindView {
         rightPane.getChildren().add(new Label("PLAYING PEGS"));
 
         VBox pegOptions = new VBox(20);
+        pegOptions.setAlignment(Pos.CENTER);
 
+        //add all peg options to the right side
         for(CodePegEnum peg : CodePegEnum.values()){
-            pegOptions.getChildren().add(new PlayingPeg(peg.));
+            if(peg != CodePegEnum.NONE) {
+                pegOptions.getChildren().add(new CodePegView(peg));
+            }
         }
+        rightPane.getChildren().add(pegOptions);
+        root.setRight(rightPane);
 
 
     }

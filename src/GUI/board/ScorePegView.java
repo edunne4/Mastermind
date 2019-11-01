@@ -3,33 +3,32 @@
  * Fall 2019
  * Instructor: Prof. Brian King
  *
- * Name: Ryan Bailis
- * Section: MWF 11am
- * Instructor: Professor Brian King
- * Date: 10/29/19
- * Time: 9:35 PM
+ * Name: Ethan Dunne
+ * Section: 11am
+ * Date: 10/31/19
+ * Time: 11:19 PM
  *
  * Project: csci205_hw02
- * Package: GUI
- * Class: PlayingPeg
+ * Package: GUI.board
+ * Class: ScorePegView
  *
  * Description:
  *
  * ****************************************
  */
-package GUI;
+package GUI.board;
 
+import game.score.ScorePegEnum;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
-public class PlayingPeg extends Circle {
+public class ScorePegView extends Circle {
+    private static final double INIT_RADIUS = 10;
 
-    private static final double INIT_RADIUS = 30;
-
-    public PlayingPeg(Paint color) {
-        super(INIT_RADIUS,color);
+    public ScorePegView(ScorePegEnum scorePeg) {
+        super(INIT_RADIUS,scorePeg.getColor());
         setupEffects();
     }
 
