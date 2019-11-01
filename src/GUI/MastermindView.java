@@ -19,6 +19,8 @@
  */
 package GUI;
 
+import game.code.CodePegEnum;
+import game.players.CodeMaker;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -81,8 +83,11 @@ public class MastermindView {
 
         //add scoring rows
         VBox leftPane = new VBox(20);
-        leftPane.getChildren().add(new Label("SCORE"));
-        VBox scoreRowsView = new VBox(10);
+        leftPane.setAlignment(Pos.CENTER);
+        Label scoreLabel = new Label("SCORE");
+        //scoreLabel.setAlignment(Pos.CENTER);
+        leftPane.getChildren().add(scoreLabel);
+        VBox scoreRowsView = new VBox(20);
         //add rows
         for (int i = 0; i < 12; i++) {
             HBox scoreRow = new HBox(20);
@@ -94,6 +99,21 @@ public class MastermindView {
         }
         leftPane.getChildren().add(scoreRowsView);
         this.root.setLeft(leftPane);
+        this.root.setMargin(root.getLeft(), new Insets(20));
+        //root.setAlignment(root.getLeft(), Pos.CENTER);
+
+
+        //do right pane (playing peg options)
+        VBox rightPane = new VBox(20);
+        rightPane.setAlignment(Pos.CENTER);
+        rightPane.getChildren().add(new Label("PLAYING PEGS"));
+
+        VBox pegOptions = new VBox(20);
+
+        for(CodePegEnum peg : CodePegEnum.values()){
+            pegOptions.getChildren().add(new PlayingPeg(peg.));
+        }
+
 
     }
 
