@@ -27,14 +27,6 @@ import javafx.scene.layout.VBox;
 
 public class MenuDropdown extends MenuBar {
 
-    private static final int MIN_NUMBER_PEGS = 3;
-    private static final int MAX_NUMBER_PEGS = 8;
-    private static final int MIN_NUMBER_TURNS = 5;
-    private static final int MAX_NUMBER_TURNS = 15;
-
-    private static final int DEFAULT_NUMBER_PEGS = 4;
-    private static final int DEFAULT_NUMBER_TURNS = 12;
-
     private MenuBar menuBar;
     private ToggleGroup numTurnsToggleGroup;
     private final ToggleGroup numPegsToggleGroup;
@@ -59,7 +51,7 @@ public class MenuDropdown extends MenuBar {
         //create the "number of pegs" setting
         numPegs = new Menu("Number of Pegs");
         numPegsToggleGroup = new ToggleGroup();
-        for (int i = MIN_NUMBER_PEGS; i <= MAX_NUMBER_PEGS; i++) {
+        for (int i = MastermindModel.MIN_NUMBER_PEGS; i <= MastermindModel.MAX_NUMBER_PEGS; i++) {
             RadioMenuItem item = new RadioMenuItem(String.valueOf(i));
             numPegs.getItems().add(item);
             numPegsToggleGroup.getToggles().add(item);
@@ -67,7 +59,7 @@ public class MenuDropdown extends MenuBar {
 
 
             //set default num pegs toggle
-            if (i == DEFAULT_NUMBER_PEGS) {
+            if (i == MastermindModel.DEFAULT_CODE_SIZE) {
                 numPegsToggleGroup.selectToggle(item);
             }
         }
@@ -75,13 +67,13 @@ public class MenuDropdown extends MenuBar {
         //create the "number of turns" settings
         numTurns = new Menu("Number of Turns");
         numTurnsToggleGroup = new ToggleGroup();
-        for (int i = MIN_NUMBER_TURNS; i <= MAX_NUMBER_TURNS; i++) {
+        for (int i = MastermindModel.MIN_NUMBER_TURNS; i <= MastermindModel.MAX_NUMBER_TURNS; i++) {
             RadioMenuItem item = new RadioMenuItem(String.valueOf(i));
             numTurns.getItems().add(item);
             numTurnsToggleGroup.getToggles().add(item);
 
             //set default num turns toggle
-            if (i == DEFAULT_NUMBER_TURNS) {
+            if (i == MastermindModel.DEFAULT_NUMBER_TURNS) {
                 numTurnsToggleGroup.selectToggle(item);
             }
 
