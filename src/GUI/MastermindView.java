@@ -25,6 +25,7 @@ import game.code.CodePegEnum;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -56,7 +57,12 @@ public class MastermindView {
         titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 60));
 //        titleLabel.setPadding(new Insets(15));
         titleLabel.setBorder(new Border(new BorderStroke(Color.SEAGREEN, BorderStrokeStyle.SOLID, new CornerRadii(4), BorderWidths.DEFAULT)));
-        this.root.setTop(titleLabel);
+
+
+        VBox top = new VBox();
+        top.getChildren().add(titleLabel);
+
+        this.root.setTop(top);
         root.setAlignment(root.getTop(), Pos.CENTER);
         root.setMargin(root.getTop(), new Insets(15));
 
@@ -95,6 +101,10 @@ public class MastermindView {
         //do right pane (playing peg options)
         VBox rightPane = new VBox(20);
         rightPane.setAlignment(Pos.CENTER);
+
+        MenuDropdown menu = new MenuDropdown();
+        rightPane.getChildren().add(menu.getMenuBar());
+
         rightPane.getChildren().add(new Label("PLAYING PEGS"));
 
         this.pegOptions = new VBox(20);
@@ -109,6 +119,7 @@ public class MastermindView {
         }
         rightPane.getChildren().add(pegOptions);
         root.setRight(rightPane);
+
 
 
     }
