@@ -20,6 +20,7 @@
 package GUI;
 
 import GUI.View.BoardRowView;
+import GUI.View.CodePegHolderView;
 import GUI.View.CodePegView;
 import game.GameManager;
 import game.code.CodePegEnum;
@@ -38,7 +39,7 @@ public class MastermindView {
     private BorderPane root;
 
     /** The peg objects that can be clicked on for choosing pegs */
-    private List<CodePegView> pegOptions = new ArrayList<>();
+    private List<CodePegHolderView> pegOptions = new ArrayList<>();
     /** All row views in the board */
     private List<BoardRowView> boardRows = new ArrayList<>();
 
@@ -114,11 +115,11 @@ public class MastermindView {
         for(CodePegEnum peg : CodePegEnum.values()){
             if(peg != CodePegEnum.NONE) {
                 //TODO maybe these should not be CodePegView, but some selectable subclass
-                CodePegView pegView = new CodePegView(peg);
+                CodePegHolderView pegHolderView = new CodePegHolderView(peg);
                 //add to scene graph
-                pegOptionsBox.getChildren().add(pegView);
+                pegOptionsBox.getChildren().add(pegHolderView);
                 //but also store it so that adding event handlers is easy
-                pegOptions.add(pegView);
+                pegOptions.add(pegHolderView);
             }
         }
         rightPane.getChildren().add(pegOptionsBox);
@@ -132,7 +133,7 @@ public class MastermindView {
         return root;
     }
 
-    public List<CodePegView> getPegOptions() {
+    public List<CodePegHolderView> getPegOptions() {
         return pegOptions;
     }
 

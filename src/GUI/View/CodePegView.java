@@ -30,9 +30,10 @@ import javafx.scene.shape.Sphere;
 public class CodePegView extends Sphere {
 
     static final double INIT_RADIUS = 20;
+    static final double SCALE_FACTOR = 1.2;
+
     private CodePegEnum pegType = CodePegEnum.NONE;
 
-    private SimpleBooleanProperty isSelected = new SimpleBooleanProperty(false);
 
     //TODO possibly change the parameter to the paint color rather than enum to decrease class coupling between this and CodePegEnum
     public CodePegView(CodePegEnum codePeg) {
@@ -41,13 +42,11 @@ public class CodePegView extends Sphere {
         setupEffects();
 
         PhongMaterial material = new PhongMaterial();
-        material.setDiffuseColor(Color.GREEN);
+        material.setDiffuseColor(codePeg.getColor());
         material.setSpecularColor(Color.DARKGRAY);
         this.setMaterial(material);
 
-        //get border set up
-        this.select();
-        this.deselect();
+
     }
 
     /**
@@ -65,21 +64,7 @@ public class CodePegView extends Sphere {
         return pegType;
     }
 
-    public void select(){
-        this.isSelected.setValue(true);
-        //super.setStroke(Color.BLACK); //TODO - change this color value to a binding
-        //super.setStrokeWidth(4);
-    }
-    public void deselect(){
-        this.isSelected.setValue(false);
-        //this.setStroke(Color.TRANSPARENT);
-    }
 
-    public boolean isSelected() {
-        return isSelected.get();
-    }
 
-    public SimpleBooleanProperty isSelectedProperty() {
-        return isSelected;
-    }
+
 }

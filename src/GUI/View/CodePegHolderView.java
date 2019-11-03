@@ -19,25 +19,31 @@
 package GUI.View;
 
 import game.code.CodePegEnum;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Circle;
 
 public class CodePegHolderView extends StackPane {
 
-    private static final double INIT_RADIUS = 10;
-
     private CodePegView currentPeg;
+
+    private SimpleBooleanProperty isSelected = new SimpleBooleanProperty(false);
 
 
     public CodePegHolderView() {
         super();
         //create empty black circle
-        this.getChildren().add(new Circle(INIT_RADIUS, Color.BLACK));
+        this.getChildren().add(new Circle(CodePegView.INIT_RADIUS, Color.BLACK));
 //        Circle clickCircle = new Circle(CodePegView.INIT_RADIUS+2, Color.BLUEVIOLET);
 //        clickCircle.setOpacity(0.2);
         //add a transparent circle for clicking on and to prevent size changes of a row
-        this.getChildren().add(new Circle(CodePegView.INIT_RADIUS+2, Color.TRANSPARENT));
+        this.getChildren().add(new Circle(CodePegView.INIT_RADIUS*CodePegView.SCALE_FACTOR, Color.TRANSPARENT));
+
+//        //get border set up
+//        this.select();
+//        this.deselect();
     }
 
     /**
@@ -68,7 +74,41 @@ public class CodePegHolderView extends StackPane {
         return  oldPeg;
     }
 
+    public void select(){
+        this.isSelected.setValue(true);
+        //super.setStroke(Color.BLACK); //TODO - change this color value to a binding
+        //super.setStrokeWidth(4);
+        currentPeg.setRadius(CodePegView.INIT_RADIUS*CodePegView.SCALE_FACTOR);
+
+        //set the specular color to WHITE
+        PhongMaterial material = new PhongMaterial();
+        material.setDiffuseColor(currentPeg.getPegType().getColor());
+        material.setSpecularColor(Color.WHITE);
+        currentPeg.setMaterial(material);
+    }
+    public void deselect(){
+        this.isSelected.setValue(false);
+        //this.setStroke(Color.TRANSPARENT);
+        currentPeg.setRadius(CodePegView.INIT_RADIUS);
+
+        //set the specular color back to DARKGRAY
+        PhongMaterial material = new PhongMaterial();
+        material.setDiffuseColor(currentPeg.getPegType().getColor());
+        material.setSpecularColor(Color.DARKGRAY);
+        currentPeg.setMaterial(material);
+
+    }
+
     public CodePegView getCurrentPeg() {
         return currentPeg;
     }
+
+    public boolean isSelected() {
+        return isSelected.get();
+    }
+
+    public SimpleBooleanProperty isSelectedProperty() {
+        return isSelected;
+    }
+
 }
