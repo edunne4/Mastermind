@@ -20,6 +20,7 @@
 package GUI;
 
 import GUI.View.BoardRowView;
+import GUI.View.BoardView;
 import GUI.View.CodePegView;
 import game.GameManager;
 import game.code.CodePegEnum;
@@ -39,8 +40,8 @@ public class MastermindView {
 
     /** The peg objects that can be clicked on for choosing pegs */
     private List<CodePegView> pegOptions = new ArrayList<>();
-    /** All row views in the board */
-    private List<BoardRowView> boardRows = new ArrayList<>();
+
+    private BoardView boardView;
 
     private MenuDropdown menuDropdown;
 
@@ -53,8 +54,6 @@ public class MastermindView {
         this.root = new BorderPane();
 
         root.setPadding(new Insets(15));
-
-
 
         MastermindTitle title = new MastermindTitle(300,60);
         VBox top = new VBox();
@@ -85,15 +84,8 @@ public class MastermindView {
 
 
         //create board of rows ****************************
-        VBox rowsView = new VBox(10);
-        rowsView.setAlignment(Pos.CENTER);
-
-        leftPane.getChildren().add(rowsView);
-
-        for (int i = 0; i < 12; i++) {
-            boardRows.add(new BoardRowView(4));
-        }
-        rowsView.getChildren().addAll(boardRows);
+        boardView = new BoardView(theModel.getTheBoard().getNumRows(), theModel.getTheBoard().getNumPegs());
+        leftPane.getChildren().add(boardView);
         this.root.setLeft(leftPane);
         //************************************************
 
@@ -136,11 +128,15 @@ public class MastermindView {
         return pegOptions;
     }
 
-    public List<BoardRowView> getBoardRows() {
-        return boardRows;
+    public BoardView getBoardView() {
+        return boardView;
     }
 
     public MenuDropdown getMenuDropdown() {
         return menuDropdown;
+    }
+
+    public void activateRow(int rowIndex) {
+        boardView.getBoardRows()[rowIndex].activate();
     }
 }

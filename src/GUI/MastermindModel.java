@@ -38,10 +38,11 @@ public class MastermindModel {
 
     /** Our game manager */
     private static GameManager theGameManager;
+    private Board theBoard;
 
     public MastermindModel() {
         // Set up our board to be used between teh codemaker and codebreaker
-        Board theBoard = new Board(DEFAULT_NUMBER_TURNS, DEFAULT_CODE_SIZE);
+        theBoard = new Board(DEFAULT_NUMBER_TURNS, DEFAULT_CODE_SIZE);
 
         // Create an instance of {@link ConsoleCodeMaker} to score guess and report back to System.out
         CodeMaker codeMaker = new GUICodeMaker(theBoard);
@@ -53,5 +54,16 @@ public class MastermindModel {
         // and a codeBreaker
         theGameManager = new GameManager(theBoard, codeMaker, codeBreaker);
 
+    }
+
+    public Board getTheBoard() {
+        return theBoard;
+    }
+
+    public void startGame(){
+        System.out.println("Starting Game");
+    }
+    public void playNextTurn(){
+        theGameManager.playNextTurn();
     }
 }

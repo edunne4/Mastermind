@@ -19,6 +19,7 @@
 package game.players;
 
 import game.board.Board;
+import game.code.Code;
 
 public class GUICodeBreaker extends CodeBreaker {
 
@@ -32,12 +33,23 @@ public class GUICodeBreaker extends CodeBreaker {
     }
 
     /**
-     * Abstract method - the CodeBreaker implementation must play their move on the board
+     *
      *
      * @param row is the row that the CodeBreaker must play a move on
      */
     @Override
     public void playGuessOnBoard(int row) {
+        boolean isValid = false;
+        String sGuess = null;
 
+        System.out.println("Making Guess");
+//            if (Code.strIsValid(sGuess)) {
+//                isValid = true;
+//            }
+//            else {
+//                System.out.println("Invalid guess! Try again!");
+//            }
+
+        //theBoard.getCodeAt(row).update(sGuess);
     }
 }

@@ -41,6 +41,9 @@ public class MastermindController {
         menuEventHandlers();
         exitEventHandler();
 
+        theModel.startGame();
+        theView.activateRow(0);
+
     }
 
     private void pegEventHandlers() {
@@ -60,12 +63,24 @@ public class MastermindController {
 
 
         //make peg holders selectable
-        for (BoardRowView row : theView.getBoardRows()) {
+        for (BoardRowView row : theView.getBoardView().getBoardRows()) {
             for (CodePegHolderView pegHolder : row.getCodePegHolders()) {
                 pegHolder.setOnMouseClicked(event -> {
+                    //if you have a peg option selected, place it on click
                     if(selectedPeg != CodePegEnum.NONE) {
+                        //get the peg holder object
                         CodePegHolderView thisPegHolder = (CodePegHolderView) event.getSource();
-                        thisPegHolder.setCurrentPeg(selectedPeg);
+                        //get the row it's in
+                        BoardRowView theRowThisIsIn = thisPegHolder.getRowThisIsIn();
+                        //if this is the active row
+                        if(theRowThisIsIn != null && theRowThisIsIn.isActive()) {
+                            //place peg in peg holder
+                            thisPegHolder.setCurrentPeg(selectedPeg);
+                            //check if the row is full and if so, display submit guess button
+                            if (theRowThisIsIn.isRowFull()) {
+                                System.out.println("Row is full! Can Submit guess!");
+                            }
+                        }
                     }
                 });
 

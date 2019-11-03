@@ -27,6 +27,7 @@ public class CodePegHolderView extends StackPane {
 
     private static final double INIT_RADIUS = 10;
 
+    private BoardRowView rowThisIsIn = null;
     private CodePegView currentPeg;
 
 
@@ -47,6 +48,15 @@ public class CodePegHolderView extends StackPane {
     public CodePegHolderView(CodePegEnum newPeg) {
         this();
         setCurrentPeg(newPeg);
+    }
+
+    /**
+     * Creates a StackPane layout with default CENTER alignment.
+     */
+    public CodePegHolderView(CodePegEnum newPeg, BoardRowView rowThisIsIn) {
+        this();
+        setCurrentPeg(newPeg);
+        this.rowThisIsIn = rowThisIsIn;
     }
 
     public void setCurrentPeg(CodePegEnum newPeg){
@@ -70,5 +80,9 @@ public class CodePegHolderView extends StackPane {
 
     public CodePegView getCurrentPeg() {
         return currentPeg;
+    }
+
+    public BoardRowView getRowThisIsIn() {
+        return rowThisIsIn;
     }
 }
