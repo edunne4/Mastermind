@@ -22,12 +22,9 @@ package GUI;
 import GUI.View.BoardRowView;
 import GUI.View.CodePegView;
 import game.code.CodePegEnum;
-import game.code.CodePegHolder;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -43,6 +40,8 @@ public class MastermindView {
     private BorderPane root;
     /** The peg objects that can be clicked on for inputting pegs */
     private List<CodePegView> pegOptions = new ArrayList<>();
+
+    private MenuDropdown menuDropdown;
 
     public MastermindView() {
         this.theModel = new MastermindModel();
@@ -107,8 +106,8 @@ public class MastermindView {
         VBox rightPane = new VBox(20);
         rightPane.setAlignment(Pos.CENTER);
 
-        MenuDropdown menu = new MenuDropdown();
-        rightPane.getChildren().add(menu.getMenuBar());
+        menuDropdown = new MenuDropdown();
+        rightPane.getChildren().add(menuDropdown.getMenuBar());
 
         rightPane.getChildren().add(new Label("PLAYING PEGS"));
 
@@ -139,5 +138,9 @@ public class MastermindView {
 
     public List<CodePegView> getPegOptions() {
         return pegOptions;
+    }
+
+    public MenuDropdown getMenuDropdown() {
+        return menuDropdown;
     }
 }

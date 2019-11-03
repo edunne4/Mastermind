@@ -23,20 +23,24 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class MenuDropdown extends VBox{
+public class MenuDropdown extends MenuBar {
 
     private static final int MIN_NUMBER_PEGS = 3;
-    private static final int MAX_NUMBER_PEGS= 8;
+    private static final int MAX_NUMBER_PEGS = 8;
     private static final int MIN_NUMBER_TURNS = 5;
     private static final int MAX_NUMBER_TURNS = 15;
 
-    private static final int DEFAULT_NUMBER_PEGS= 4;
+    private static final int DEFAULT_NUMBER_PEGS = 4;
     private static final int DEFAULT_NUMBER_TURNS = 12;
 
     private MenuBar menuBar;
+    private ToggleGroup numTurnsToggleGroup;
+    private final ToggleGroup numPegsToggleGroup;
+    private Menu quit;
+    private final Menu numTurns;
+    private final Menu numPegs;
 
     public MenuDropdown() {
         this.menuBar = new MenuBar();
@@ -53,12 +57,14 @@ public class MenuDropdown extends VBox{
         settings.setGraphic(settingsImage);
 
         //create the "number of pegs" setting
-        Menu numPegs = new Menu("Number of Pegs");
-        ToggleGroup numPegsToggleGroup = new ToggleGroup();
-        for (int i = MIN_NUMBER_PEGS; i <= MAX_NUMBER_PEGS ; i++) {
+        numPegs = new Menu("Number of Pegs");
+        numPegsToggleGroup = new ToggleGroup();
+        for (int i = MIN_NUMBER_PEGS; i <= MAX_NUMBER_PEGS; i++) {
             RadioMenuItem item = new RadioMenuItem(String.valueOf(i));
             numPegs.getItems().add(item);
             numPegsToggleGroup.getToggles().add(item);
+
+
 
             //set default num pegs toggle
             if (i == DEFAULT_NUMBER_PEGS) {
@@ -67,8 +73,8 @@ public class MenuDropdown extends VBox{
         }
 
         //create the "number of turns" settings
-        Menu numTurns = new Menu("Number of Turns");
-        ToggleGroup numTurnsToggleGroup = new ToggleGroup();
+        numTurns = new Menu("Number of Turns");
+        numTurnsToggleGroup = new ToggleGroup();
         for (int i = MIN_NUMBER_TURNS; i <= MAX_NUMBER_TURNS; i++) {
             RadioMenuItem item = new RadioMenuItem(String.valueOf(i));
             numTurns.getItems().add(item);
@@ -82,21 +88,37 @@ public class MenuDropdown extends VBox{
         }
 
         //set image of the settings settings
-        Menu quit = new Menu("Quit");
+        quit = new Menu("Quit");
         ImageView exitIcon = new ImageView(new Image(getClass().getResourceAsStream("icons/exit.png")));
         exitIcon.setFitWidth(25);
         exitIcon.setFitHeight(25);
         quit.setGraphic(exitIcon);
 
+        MenuItem quitforSure = new MenuItem("Exit Game Now");
+        quit.getItems().add(quitforSure);
+
 
         //add to settings
-        settings.getItems().addAll(numPegs,numTurns);
+        settings.getItems().addAll(numPegs, numTurns);
         menuBar.getMenus().add(settings);
         menuBar.getMenus().add(quit);
+
 
     }
 
     public MenuBar getMenuBar() {
         return menuBar;
+    }
+
+    public Menu getQuit() {
+        return quit;
+    }
+
+    public Menu getNumTurns() {
+        return numTurns;
+    }
+
+    public Menu getNumPegs() {
+        return numPegs;
     }
 }

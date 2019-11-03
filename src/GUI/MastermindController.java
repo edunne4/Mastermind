@@ -21,18 +21,26 @@ package GUI;
 
 import GUI.View.CodePegView;
 import game.code.CodePegEnum;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.input.MouseEvent;
 
 public class MastermindController {
+
     private MastermindView theView;
-//    private MastermindModel theModel;
+    private MastermindModel theModel;
 
     private CodePegEnum selectedPeg;
 
 
-    public MastermindController(MastermindView theView/*, MastermindModel theModel  */) {
+    public MastermindController(MastermindView theView, MastermindModel theModel) {
         this.theView = theView;
-        //this.theModel = theModel;
+        this.theModel = theModel;
         createEventHandlers();
+        menuEventHandlers();
+        exitEventHandler();
 
     }
 
@@ -50,6 +58,30 @@ public class MastermindController {
                 }
             });
         }
+    }
+
+
+    private void exitEventHandler() {
+
+        theView.getMenuDropdown().getQuit().setOnAction( event -> System.exit(0));
+
+
+    }
+
+    private void menuEventHandlers() {
+
+        //set the number of pegs
+        for (MenuItem menuItem : theView.getMenuDropdown().getNumPegs().getItems()) {
+            menuItem.setOnAction(event ->
+                    System.out.println("The user now wants " + menuItem.getText() + " pegs."));
+        }
+
+        //set the number of turns
+        for (MenuItem menuItem : theView.getMenuDropdown().getNumTurns().getItems()) {
+            menuItem.setOnAction(event ->
+                    System.out.println("The user now wants " + menuItem.getText() + " turns."));
+        }
+
     }
 
     private void selectPeg(CodePegView pegClicked){
