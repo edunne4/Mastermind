@@ -27,6 +27,8 @@ import javafx.scene.shape.Circle;
 
 public class CodePegHolderView extends StackPane {
 
+
+    private BoardRowView rowThisIsIn = null;
     private CodePegView currentPeg;
 
     private SimpleBooleanProperty isSelected = new SimpleBooleanProperty(false);
@@ -53,6 +55,15 @@ public class CodePegHolderView extends StackPane {
     public CodePegHolderView(CodePegEnum newPeg) {
         this();
         setCurrentPeg(newPeg);
+    }
+
+    /**
+     * Creates a StackPane layout with default CENTER alignment.
+     */
+    public CodePegHolderView(CodePegEnum newPeg, BoardRowView rowThisIsIn) {
+        this();
+        setCurrentPeg(newPeg);
+        this.rowThisIsIn = rowThisIsIn;
     }
 
     public void setCurrentPeg(CodePegEnum newPeg){
@@ -101,6 +112,10 @@ public class CodePegHolderView extends StackPane {
 
     public CodePegView getCurrentPeg() {
         return currentPeg;
+    }
+
+    public BoardRowView getRowThisIsIn() {
+        return rowThisIsIn;
     }
 
     public boolean isSelected() {
