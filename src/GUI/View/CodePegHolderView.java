@@ -34,6 +34,10 @@ public class CodePegHolderView extends StackPane {
         super();
         //create empty black circle
         this.getChildren().add(new Circle(INIT_RADIUS, Color.BLACK));
+//        Circle clickCircle = new Circle(CodePegView.INIT_RADIUS+2, Color.BLUEVIOLET);
+//        clickCircle.setOpacity(0.2);
+        //add a transparent circle for clicking on and to prevent size changes of a row
+        this.getChildren().add(new Circle(CodePegView.INIT_RADIUS+2, Color.TRANSPARENT));
     }
 
     /**
@@ -49,14 +53,19 @@ public class CodePegHolderView extends StackPane {
         setCurrentPeg(new CodePegView(newPeg));
     }
     //TODO maybe get rid of this overload and just have the one that accepts the enum as parameter
-    public void setCurrentPeg(CodePegView newPegView) {
-        this.currentPeg = newPegView;
-        //return currentPeg.getPegType(); //TODO - return previous peg held here
+    public CodePegEnum setCurrentPeg(CodePegView newPegView) {
+        //return the previous peg type held here if it is not null
+        CodePegEnum oldPeg = (currentPeg != null) ? currentPeg.getPegType() : CodePegEnum.NONE;
 
-        //this.getChildren().clear(); // get rid of any previous children
+        //remove the old peg
+        this.getChildren().remove(this.currentPeg);
+
+        //set the new one
+        this.currentPeg = newPegView;
         if(newPegView.getPegType() != CodePegEnum.NONE) { // If there is a non-none peg here, show it
             this.getChildren().add(this.currentPeg);
         }
+        return  oldPeg;
     }
 
     public CodePegView getCurrentPeg() {

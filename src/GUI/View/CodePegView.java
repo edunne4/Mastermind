@@ -27,7 +27,7 @@ import javafx.scene.shape.Circle;
 
 public class CodePegView extends Circle {
 
-    private static final double INIT_RADIUS = 20;
+    static final double INIT_RADIUS = 20;
     private CodePegEnum pegType = CodePegEnum.NONE;
 
     private SimpleBooleanProperty isSelected = new SimpleBooleanProperty(false);

@@ -19,32 +19,31 @@
  */
 package GUI;
 
+import GUI.View.BoardRowView;
+import GUI.View.CodePegHolderView;
 import GUI.View.CodePegView;
 import game.code.CodePegEnum;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.Menu;
+import javafx.beans.binding.Bindings;
 import javafx.scene.control.MenuItem;
-import javafx.scene.input.MouseEvent;
 
 public class MastermindController {
 
     private MastermindView theView;
     private MastermindModel theModel;
 
-    private CodePegEnum selectedPeg;
+    private CodePegEnum selectedPeg = CodePegEnum.NONE;
 
 
     public MastermindController(MastermindView theView, MastermindModel theModel) {
         this.theView = theView;
         this.theModel = theModel;
-        createEventHandlers();
+        pegEventHandlers();
         menuEventHandlers();
         exitEventHandler();
 
     }
 
-    private void createEventHandlers() {
+    private void pegEventHandlers() {
 
         //make each peg option in the peg options have an on click event
         for (CodePegView pegOption : theView.getPegOptions()) {
@@ -57,6 +56,22 @@ public class MastermindController {
                     selectPeg(pegView);
                 }
             });
+        }
+
+
+        //make peg holders selectable
+        for (BoardRowView row : theView.getBoardRows()) {
+            for (CodePegHolderView pegHolder : row.getCodePegHolders()) {
+                pegHolder.setOnMouseClicked(event -> {
+                    if(selectedPeg != CodePegEnum.NONE) {
+                        CodePegHolderView thisPegHolder = (CodePegHolderView) event.getSource();
+                        thisPegHolder.setCurrentPeg(selectedPeg);
+                    }
+                });
+
+            }
+            //set up binding for each row to show whether or not they are active
+            //row.isActiveRowProperty().bind;
         }
     }
 
@@ -85,16 +100,17 @@ public class MastermindController {
     }
 
     private void selectPeg(CodePegView pegClicked){
-        //TODO - deselect all other pegs
+        //deselect all other pegs
+        for (CodePegView pegOption : theView.getPegOptions()) {
+            deselectPeg(pegOption);
+        }
         selectedPeg = pegClicked.getPegType();
         pegClicked.select();
-        System.out.println("Selected");
     }
 
     private void deselectPeg(CodePegView pegClicked){
         selectedPeg = CodePegEnum.NONE;
         pegClicked.deselect();
-        System.out.println("Deselected");
     }
 
 

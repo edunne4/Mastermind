@@ -19,5 +19,34 @@
  */
 package GUI;
 
+import game.GameManager;
+import game.board.Board;
+import game.players.*;
+
 public class MastermindModel {
+
+    /** Standard Mastermind has 12 guesses allowed */
+    public static final int DEFAULT_NUM_GUESSES = 12;
+
+    /** There are 4 positions to be guessed */
+    public static final int DEFAULT_CODE_SIZE = 4;
+
+    /** Our game manager */
+    private static GameManager theGameManager;
+
+    public MastermindModel() {
+        // Set up our board to be used between teh codemaker and codebreaker
+        Board theBoard = new Board(DEFAULT_NUM_GUESSES, DEFAULT_CODE_SIZE);
+
+        // Create an instance of {@link ConsoleCodeMaker} to score guess and report back to System.out
+        CodeMaker codeMaker = new GUICodeMaker(theBoard);
+
+        // A {@link ConsoleCodeBreaker} will make guesses read in from the user at System.in
+        CodeBreaker codeBreaker = new GUICodeBreaker(theBoard);
+
+        // Finally, we have the game manager that keeps track of how a game progresses with a board, a codeMaker
+        // and a codeBreaker
+        theGameManager = new GameManager(theBoard, codeMaker, codeBreaker);
+
+    }
 }

@@ -21,14 +21,12 @@ package GUI;
 
 import GUI.View.BoardRowView;
 import GUI.View.CodePegView;
+import game.GameManager;
 import game.code.CodePegEnum;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,14 +37,15 @@ public class MastermindView {
 
     private BorderPane root;
 
-    /** The peg objects that can be clicked on for inputting pegs */
+    /** The peg objects that can be clicked on for choosing pegs */
     private List<CodePegView> pegOptions = new ArrayList<>();
+    /** All row views in the board */
+    private List<BoardRowView> boardRows = new ArrayList<>();
 
     private MenuDropdown menuDropdown;
 
     public MastermindView() {
         this.theModel = new MastermindModel();
-
         initSceneGraph();
     }
 
@@ -82,19 +81,21 @@ public class MastermindView {
         labels.getChildren().add(secretCodeLabel);
 
         leftPane.getChildren().add(labels);
+        //********************************************
 
 
         //create board of rows ****************************
-        VBox rowsView = new VBox(20);
+        VBox rowsView = new VBox(10);
         rowsView.setAlignment(Pos.CENTER);
 
         leftPane.getChildren().add(rowsView);
 
         for (int i = 0; i < 12; i++) {
-            rowsView.getChildren().add(new BoardRowView());
+            boardRows.add(new BoardRowView(4));
         }
+        rowsView.getChildren().addAll(boardRows);
         this.root.setLeft(leftPane);
-
+        //************************************************
 
 
         //do right pane (playing peg options)
@@ -133,6 +134,10 @@ public class MastermindView {
 
     public List<CodePegView> getPegOptions() {
         return pegOptions;
+    }
+
+    public List<BoardRowView> getBoardRows() {
+        return boardRows;
     }
 
     public MenuDropdown getMenuDropdown() {

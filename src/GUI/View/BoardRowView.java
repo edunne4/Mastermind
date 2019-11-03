@@ -21,50 +21,69 @@ package GUI.View;
 import game.board.RowOnBoard;
 import game.code.Code;
 import game.score.Score;
-import javafx.scene.layout.HBox;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableObjectValue;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BoardRowView extends HBox {
 
-    //TODO - get rid of this, this number should come from somewhere else such as GameManager
-    private static final int NUM_PEGS = 4;
+    /** A boolean for whether or not this is the current row being played or not. */
+    private SimpleBooleanProperty isActiveRow = new SimpleBooleanProperty(false);
 
-    public BoardRowView() {
-//        HBox scoreRow = new HBox(10);
-//        HBox pegRow = new HBox(30);
-//        this.setSpacing(20);
-//
-//        //create empty scoring peg holders
-//        for (int i = 0; i < NUM_PEGS; i++) {
-//            scoreRow.getChildren().add(new ScorePegHolderView());
-//        }
-//
-//        //create empty code peg holders
-//        for (int i = 0; i < NUM_PEGS; i++) {
-//            pegRow.getChildren().add(new CodePegHolderView());
-//        }
-//
-//        this.getChildren().addAll(scoreRow, pegRow);
-        this(new RowOnBoard(NUM_PEGS));
+    private List<CodePegHolderView> codePegHolders = new ArrayList<>();
+
+    /**
+     * Explicit constructor for showing an empty row
+     * @param numPegs the number of pegs in a code guess
+     */
+    public BoardRowView(int numPegs) {
+        this(new RowOnBoard(numPegs));
     }
 
+    /**
+     * Explicit constructor for showing a specific row
+     * @param row the row to show
+     */
     public BoardRowView(RowOnBoard row) {
         HBox scoreRow = new HBox(10);
-        HBox pegRow = new HBox(30);
+        HBox pegRow = new HBox(10);
         this.setSpacing(20);
 
 
         Score score = row.getScore();
         //create empty scoring pegs
-        for (int i = 0; i < NUM_PEGS; i++) {
+        for (int i = 0; i < row.getCode().getCodeSize(); i++) {
             scoreRow.getChildren().add(new ScorePegHolderView(score.getScoringPegAt(i)));
         }
 
         Code code = row.getCode();
         //create empty pegs
-        for (int i = 0; i < NUM_PEGS; i++) {
-            pegRow.getChildren().add(new CodePegHolderView(code.getPegAt(i)));
+        for (int i = 0; i < row.getCode().getCodeSize(); i++) {
+            codePegHolders.add(new CodePegHolderView(code.getPegAt(i)));
         }
+        pegRow.getChildren().addAll(codePegHolders);
+        pegRow.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(4), BorderWidths.DEFAULT)));
 
         this.getChildren().addAll(scoreRow, pegRow);
+
+    }
+
+
+    public List<CodePegHolderView> getCodePegHolders() {
+        return codePegHolders;
+    }
+
+    public boolean isActiveRow() {
+        return isActiveRow.get();
+    }
+
+    public SimpleBooleanProperty isActiveRowProperty() {
+        return isActiveRow;
     }
 }
