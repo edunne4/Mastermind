@@ -28,6 +28,7 @@ private MastermindView theView;
 
         Scene scene = new Scene(theView.getRoot());
 
+
         primaryStage.setTitle("Mastermind");
         primaryStage.setScene(scene);
         primaryStage.sizeToScene();

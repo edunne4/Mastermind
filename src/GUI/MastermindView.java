@@ -38,6 +38,7 @@ public class MastermindView {
     private final MastermindModel theModel;
 
     private BorderPane root;
+
     /** The peg objects that can be clicked on for inputting pegs */
     private List<CodePegView> pegOptions = new ArrayList<>();
 
@@ -54,17 +55,11 @@ public class MastermindView {
 
         root.setPadding(new Insets(15));
 
-        //create title pane
-        Label titleLabel = new Label("MASTERMIND");
-        titleLabel.setAlignment(Pos.CENTER);
-        titleLabel.setTextFill(Color.SEAGREEN);
-        titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 60));
-//        titleLabel.setPadding(new Insets(15));
-        titleLabel.setBorder(new Border(new BorderStroke(Color.SEAGREEN, BorderStrokeStyle.SOLID, new CornerRadii(4), BorderWidths.DEFAULT)));
 
 
+        MastermindTitle title = new MastermindTitle(300,60);
         VBox top = new VBox();
-        top.getChildren().add(titleLabel);
+        top.getChildren().add(title);
 
         this.root.setTop(top);
         root.setAlignment(root.getTop(), Pos.CENTER);
