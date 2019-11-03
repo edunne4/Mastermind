@@ -55,16 +55,13 @@ public class MastermindView {
 
         root.setPadding(new Insets(15));
 
-
-
-        MastermindTitle title = new MastermindTitle(300,60);
+        MastermindTitle title = new MastermindTitle(300,80);
         VBox top = new VBox();
         top.getChildren().add(title);
 
         this.root.setTop(top);
         root.setAlignment(root.getTop(), Pos.CENTER);
         root.setMargin(root.getTop(), new Insets(15));
-
 
         //left piece (board)
         VBox leftPane = new VBox(20);
@@ -101,12 +98,14 @@ public class MastermindView {
 
         //do right pane (playing peg options)
         VBox rightPane = new VBox(20);
-        rightPane.setAlignment(Pos.CENTER);
+        //rightPane.setAlignment(Pos.CENTER);
 
         menuDropdown = new MenuDropdown();
         rightPane.getChildren().add(menuDropdown.getMenuBar());
 
-        rightPane.getChildren().add(new Label("PLAYING PEGS"));
+        Label playingPegsLabel = new Label("PLAYING PEGS");
+
+        rightPane.getChildren().add(playingPegsLabel);
 
         VBox pegOptionsBox = new VBox(20);
         pegOptionsBox.setAlignment(Pos.CENTER);

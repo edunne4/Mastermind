@@ -105,8 +105,9 @@ public class MastermindTitle extends BorderPane {
         Label titleLabel = new Label("MASTERMIND");
         titleLabel.setAlignment(Pos.CENTER);
         titleLabel.setTextFill(Color.SEAGREEN);
-        titleLabel.setMaxWidth(width - LIGHT_SIZE*2);
-        titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 40));
+        titleLabel.setMaxWidth(width - (LIGHT_SIZE*2));
+        titleLabel.setMaxHeight(height - (LIGHT_SIZE*2));
+        titleLabel.setFont(Font.font("Andale Mono", FontWeight.BOLD, 30));
         //titleLabel.setBorder(new Border(new BorderStroke(Color.SEAGREEN, BorderStrokeStyle.SOLID, new CornerRadii(4), BorderWidths.DEFAULT)));
 
 

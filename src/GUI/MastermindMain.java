@@ -28,6 +28,8 @@ private MastermindView theView;
 
         Scene scene = new Scene(theView.getRoot());
 
+        System.out.println(javafx.scene.text.Font.getFamilies());
+
 
         primaryStage.setTitle("Mastermind");
         primaryStage.setScene(scene);
