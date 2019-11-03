@@ -20,24 +20,23 @@
 package GUI.View;
 
 import game.code.CodePegEnum;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Sphere;
 
 public class CodePegView extends Sphere {
 
-    static final double INIT_RADIUS = 20;
-    static final double SCALE_FACTOR = 1.2;
+    static final double PEG_RADIUS = 20;
+    static final double PEG_SELECTED_SCALE_FACTOR = 1.2;
+    static final double PEG_HOLE_SCALE_FACTOR = 0.5;
 
     private CodePegEnum pegType = CodePegEnum.NONE;
 
 
     //TODO possibly change the parameter to the paint color rather than enum to decrease class coupling between this and CodePegEnum
     public CodePegView(CodePegEnum codePeg) {
-        super(INIT_RADIUS);
+        super(PEG_RADIUS);
         this.pegType = codePeg;
         setupEffects();
 

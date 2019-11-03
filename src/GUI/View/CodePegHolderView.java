@@ -35,11 +35,11 @@ public class CodePegHolderView extends StackPane {
     public CodePegHolderView() {
         super();
         //create empty black circle
-        this.getChildren().add(new Circle(CodePegView.INIT_RADIUS, Color.BLACK));
+        this.getChildren().add(new Circle(CodePegView.PEG_RADIUS*CodePegView.PEG_HOLE_SCALE_FACTOR, Color.BLACK));
 //        Circle clickCircle = new Circle(CodePegView.INIT_RADIUS+2, Color.BLUEVIOLET);
 //        clickCircle.setOpacity(0.2);
         //add a transparent circle for clicking on and to prevent size changes of a row
-        this.getChildren().add(new Circle(CodePegView.INIT_RADIUS*CodePegView.SCALE_FACTOR, Color.TRANSPARENT));
+        this.getChildren().add(new Circle(CodePegView.PEG_RADIUS *CodePegView.PEG_SELECTED_SCALE_FACTOR, Color.TRANSPARENT));
 
 //        //get border set up
 //        this.select();
@@ -78,7 +78,7 @@ public class CodePegHolderView extends StackPane {
         this.isSelected.setValue(true);
         //super.setStroke(Color.BLACK); //TODO - change this color value to a binding
         //super.setStrokeWidth(4);
-        currentPeg.setRadius(CodePegView.INIT_RADIUS*CodePegView.SCALE_FACTOR);
+        currentPeg.setRadius(CodePegView.PEG_RADIUS *CodePegView.PEG_SELECTED_SCALE_FACTOR);
 
         //set the specular color to WHITE
         PhongMaterial material = new PhongMaterial();
@@ -89,7 +89,7 @@ public class CodePegHolderView extends StackPane {
     public void deselect(){
         this.isSelected.setValue(false);
         //this.setStroke(Color.TRANSPARENT);
-        currentPeg.setRadius(CodePegView.INIT_RADIUS);
+        currentPeg.setRadius(CodePegView.PEG_RADIUS);
 
         //set the specular color back to DARKGRAY
         PhongMaterial material = new PhongMaterial();
