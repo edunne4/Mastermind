@@ -23,9 +23,11 @@ import game.code.CodePegEnum;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Sphere;
 
-public class CodePegView extends Circle {
+public class CodePegView extends Sphere {
 
     static final double INIT_RADIUS = 20;
     private CodePegEnum pegType = CodePegEnum.NONE;
@@ -34,9 +36,14 @@ public class CodePegView extends Circle {
 
     //TODO possibly change the parameter to the paint color rather than enum to decrease class coupling between this and CodePegEnum
     public CodePegView(CodePegEnum codePeg) {
-        super(INIT_RADIUS,codePeg.getColor());
+        super(INIT_RADIUS);
         this.pegType = codePeg;
         setupEffects();
+
+        PhongMaterial material = new PhongMaterial();
+        material.setDiffuseColor(Color.GREEN);
+        material.setSpecularColor(Color.DARKGRAY);
+        this.setMaterial(material);
 
         //get border set up
         this.select();
@@ -60,12 +67,12 @@ public class CodePegView extends Circle {
 
     public void select(){
         this.isSelected.setValue(true);
-        super.setStroke(Color.BLACK); //TODO - change this color value to a binding
-        super.setStrokeWidth(4);
+        //super.setStroke(Color.BLACK); //TODO - change this color value to a binding
+        //super.setStrokeWidth(4);
     }
     public void deselect(){
         this.isSelected.setValue(false);
-        this.setStroke(Color.TRANSPARENT);
+        //this.setStroke(Color.TRANSPARENT);
     }
 
     public boolean isSelected() {
