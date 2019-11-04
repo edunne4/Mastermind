@@ -51,8 +51,12 @@ public class ScorePegHolderView extends StackPane {
         setCurrentPeg(new ScorePegView(newPeg));
     }
     public void setCurrentPeg(ScorePegView newPegView) {
+
+        //remove the old peg
+        this.getChildren().remove(this.currentPeg);
+
+        //set the new one
         this.currentPeg = newPegView;
-        //return currentPeg.getPegType(); //TODO - return previous peg held here
         if(newPegView.getType() != ScorePegEnum.NONE) { // If there is a non-none peg here, show it
             this.getChildren().add(this.currentPeg);
         }

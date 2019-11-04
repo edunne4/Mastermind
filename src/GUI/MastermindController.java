@@ -21,10 +21,8 @@ package GUI;
 
 import GUI.View.BoardRowView;
 import GUI.View.CodePegHolderView;
-import GUI.View.CodePegView;
 import game.code.CodePegEnum;
-import game.code.CodePegHolder;
-import javafx.beans.binding.Bindings;
+import game.score.Score;
 import javafx.scene.control.MenuItem;
 
 public class MastermindController {
@@ -41,6 +39,7 @@ public class MastermindController {
         pegEventHandlers();
         menuEventHandlers();
         exitEventHandler();
+        buttonEventHandler();
 
         theModel.startGame();
         theView.activateRow(0);
@@ -79,7 +78,8 @@ public class MastermindController {
                             thisPegHolder.setCurrentPeg(selectedPeg);
                             //check if the row is full and if so, display submit guess button
                             if (theRowThisIsIn.isRowFull()) {
-                                System.out.println("Row is full! Can Submit guess!");
+                                //enable submit button
+                                theView.allowGuess(true);
                             }
                         }
                     }
@@ -89,6 +89,25 @@ public class MastermindController {
             //set up binding for each row to show whether or not they are active
             //row.isActiveRowProperty().bind;
         }
+    }
+
+    private void buttonEventHandler() {
+        theView.getSubmitBtn().setOnAction(event -> {
+            //disable the button
+            theView.allowGuess(false);
+
+            BoardRowView currentRowView = theView.getBoardView().getRowViewAt(theModel.getTheGameManager().getNumTurnsPlayed());
+            //make a guess with the code in the active row
+            Score scoreForThisGuess = theModel.makeGuess(currentRowView.getCodeString());
+//            System.out.println(scoreForThisGuess.scoreToString());
+            currentRowView.updateScore(scoreForThisGuess);
+            currentRowView.confirmPegs(); //changes the state from active to set
+
+            //tell next row to activate //TODO - handle index out of bounds exception
+            theView.getBoardView().getRowViewAt(theModel.getTheGameManager().getNumTurnsPlayed()).activate();
+
+
+        });
     }
 
 

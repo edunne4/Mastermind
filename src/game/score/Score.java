@@ -149,4 +149,5 @@ public class Score {
                 ", numberOfCodePegs=" + numberOfCodePegs +
                 '}';
     }
+
 }

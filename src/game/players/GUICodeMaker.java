@@ -19,8 +19,9 @@
 package game.players;
 
 import game.board.Board;
+import game.code.Code;
 
-public class GUICodeMaker extends CodeMaker {
+public class GUICodeMaker extends CodeMaker{
 
     /**
      * Create a new instance of CodeMaker with a specified {@link Board}
@@ -38,6 +39,11 @@ public class GUICodeMaker extends CodeMaker {
      */
     @Override
     public void scoreGuessOnBoard(int row) {
+        Code guess = theBoard.getCodeAt(row);
+        //update model board
+        scoreGuess(guess, theBoard.getScoreAt(row));
 
+        //update display
     }
+
 }

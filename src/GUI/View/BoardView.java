@@ -27,26 +27,28 @@ import java.util.List;
 public class BoardView extends VBox {
 
     /** All row views in the board */
-    private BoardRowView[] boardRows;
+    private List<BoardRowView> boardRows = new ArrayList<>();
 
 
     /**
      * Creates a VBox layout with spacing = 0 and alignment at TOP_LEFT.
      */
     public BoardView(int numRows, int numPegs) {
-        super(10);
+        super(5);
         this.setAlignment(Pos.CENTER);
-
-        boardRows = new BoardRowView[numRows];
 
         //make {numRows} rows each with {numPegs} pegs
         for (int i = 0; i < numRows; i++) {
-            boardRows[i] = new BoardRowView(numPegs);
+            boardRows.add(new BoardRowView(numPegs));
         }
         this.getChildren().addAll(boardRows);
     }
 
-    public BoardRowView[] getBoardRows() {
+    public List<BoardRowView> getBoardRows() {
         return boardRows;
+    }
+
+    public BoardRowView getRowViewAt(int index){
+        return boardRows.get(index);
     }
 }

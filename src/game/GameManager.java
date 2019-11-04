@@ -19,6 +19,7 @@ package game;
 import game.board.Board;
 import game.players.CodeBreaker;
 import game.players.CodeMaker;
+import game.score.Score;
 
 /**
  * A class that encapsulates all objects needed to play a game of Mastermind. It includes the following
@@ -37,8 +38,8 @@ public class GameManager {
      */
     private enum GameState {
         READY, CODEBREAKER_TURN, CODEMAKER_RESPOND, DONE;
-    }
 
+    }
     /** The board that will maintain all pegs played thorughout the game */
     private Board theBoard;
 
@@ -110,6 +111,10 @@ public class GameManager {
         return currentRowBeingPlayed + 1;
     }
 
+    public int getCurrentRowBeingPlayed() {
+        return currentRowBeingPlayed;
+    }
+
     /**
      * Performs the heavy work of orchestrating everything that needs to happen to ensure ONE turn is executed
      * in the correct order. This method will first call {@link CodeBreaker#playGuessOnBoard(int)} to play a
@@ -141,5 +146,36 @@ public class GameManager {
             }
         }
         return state;
+    }
+
+
+    public GameState playNextTurnWithGuess(String sGuess) {
+        currentRowBeingPlayed++;
+
+        if (state == GameState.READY || state == GameState.CODEBREAKER_TURN) {
+            //codeBreaker.playGuessOnBoard(currentRowBeingPlayed);
+            codeBreaker.playThisGuessOnBoard(currentRowBeingPlayed, sGuess);
+            state = GameState.CODEMAKER_RESPOND;
+            codeMaker.scoreGuessOnBoard(currentRowBeingPlayed);
+
+            if (isWin())
+                state = GameState.DONE;
+            else {
+                if (currentRowBeingPlayed+1 == theBoard.getNumRows())
+                    state = GameState.DONE;
+                else
+                    state = GameState.CODEBREAKER_TURN;
+            }
+        }
+        return state;
+    }
+
+
+    public Board getTheBoard() {
+        return theBoard;
+    }
+
+    public Score getCurrentScore() {
+        return theBoard.getScoreAt(currentRowBeingPlayed);
     }
 }

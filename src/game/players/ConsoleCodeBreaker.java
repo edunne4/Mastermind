@@ -52,4 +52,9 @@ public class ConsoleCodeBreaker extends CodeBreaker {
         }
         theBoard.getCodeAt(row).update(sGuess);
     }
+
+    @Override
+    public void playThisGuessOnBoard(int row, String sGuess) {
+        //do nothing
+    }
 }

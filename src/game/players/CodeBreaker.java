@@ -43,4 +43,7 @@ public abstract class CodeBreaker {
      * @param row is the row that the CodeBreaker must play a move on
      */
     public abstract void playGuessOnBoard(int row);
+
+
+    public abstract void playThisGuessOnBoard(int row, String sGuess);
 }

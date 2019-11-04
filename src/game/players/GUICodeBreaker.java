@@ -18,6 +18,7 @@
  */
 package game.players;
 
+import GUI.View.BoardView;
 import game.board.Board;
 import game.code.Code;
 
@@ -39,17 +40,20 @@ public class GUICodeBreaker extends CodeBreaker {
      */
     @Override
     public void playGuessOnBoard(int row) {
-        boolean isValid = false;
-        String sGuess = null;
+        //String sGuess = theBoardView.getBoardRows().get(row).getCodeString();
 
         System.out.println("Making Guess");
-//            if (Code.strIsValid(sGuess)) {
-//                isValid = true;
-//            }
-//            else {
-//                System.out.println("Invalid guess! Try again!");
-//            }
 
-        //theBoard.getCodeAt(row).update(sGuess);
+        theBoard.getCodeAt(row).update("1234");
+    }
+
+    /**
+     * Update the board with a specific guess
+     * @param row the row index of the row to update
+     * @param sGuess the guess to update the row with
+     */
+    @Override
+    public void playThisGuessOnBoard(int row, String sGuess){
+        theBoard.getCodeAt(row).update(sGuess);
     }
 }

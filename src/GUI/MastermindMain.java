@@ -14,7 +14,7 @@ private MastermindView theView;
     public void init() throws Exception {
         super.init();
         this.theModel = new MastermindModel();
-        this.theView = new MastermindView();
+        this.theView = new MastermindView(theModel);
     }
 
     public static void main(String[] args) {

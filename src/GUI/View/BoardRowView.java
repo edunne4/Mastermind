@@ -52,9 +52,9 @@ public class BoardRowView extends HBox {
             return indicatorColor;
         }
 
+
     }
     private RowState state = RowState.UNSET;
-
     /** A boolean for whether or not this is the current row being played or not. */
     //private SimpleBooleanProperty isActiveRow = new SimpleBooleanProperty(false);
 
@@ -63,6 +63,7 @@ public class BoardRowView extends HBox {
     private HBox pegRow;
 
     private HBox scoreRow;
+
     /**
      * Explicit constructor for showing an empty row
      * @param numPegs the number of pegs in a code guess
@@ -70,7 +71,6 @@ public class BoardRowView extends HBox {
     public BoardRowView(int numPegs) {
         this(new RowOnBoard(numPegs));
     }
-
     /**
      * Explicit constructor for showing a specific row
      * @param row the row to show
@@ -78,7 +78,7 @@ public class BoardRowView extends HBox {
     public BoardRowView(RowOnBoard row) {
         scoreRow = new HBox(10);
         pegRow = new HBox(10);
-        this.setSpacing(20);
+        this.setSpacing(10);
 
 
         Score score = row.getScore();
@@ -96,7 +96,6 @@ public class BoardRowView extends HBox {
         pegRow.setBorder(new Border(new BorderStroke(state.getIndicatorColor(), BorderStrokeStyle.SOLID, new CornerRadii(4), BorderWidths.DEFAULT)));
 
         this.getChildren().addAll(scoreRow, pegRow);
-
     }
 
 
@@ -111,23 +110,50 @@ public class BoardRowView extends HBox {
                 return false;
             }
         }
+        state = RowState.READY_TO_BE_SET;
+        //update border color
+        updateBorderColor();
         return true;
     }
 
     public void activate(){
         state = RowState.ACTIVE;
+        updateBorderColor();
+    }
+
+    /**
+     * Change the border color of the peg row based on the current state of the row
+     */
+    private void updateBorderColor(){
         pegRow.setBorder(new Border(new BorderStroke(state.getIndicatorColor(), BorderStrokeStyle.SOLID, new CornerRadii(4), BorderWidths.DEFAULT)));
+    }
+
+    /**
+     * Convert the GUI code into a Game peg code
+     * @return the Game peg code string that is represented by this row
+     */
+    public String getCodeString(){
+        String sCode = "";
+        for (Node child : this.pegRow.getChildren()) {
+            CodePegHolderView pegHolder = (CodePegHolderView) child;
+            CodePegView peg = pegHolder.getCurrentPeg();
+            if(peg != null){
+                sCode += peg.getPegType().toString();
+            }
+        }
+
+        return sCode;
     }
 
 
     /**
-     * Confirm that these pegs are the ones to be locked in place
-     * @return the code that these pegs form in the game's format
+     * Lock the current pegs into place by changing the state to set
      */
     public void confirmPegs(){
-        //use ordinal+1 of the pegs' enums to create the code in the games format
-
+        state = RowState.SET;
+        updateBorderColor();
     }
+
 
 
     /**
@@ -135,5 +161,12 @@ public class BoardRowView extends HBox {
      */
     public boolean isActive() {
         return state == RowState.ACTIVE;
+    }
+
+    public void updateScore(Score score) {
+        for (int i = 0; i < scoreRow.getChildren().size(); i++) {
+            ScorePegHolderView pegHolderView = (ScorePegHolderView) scoreRow.getChildren().get(i);
+            pegHolderView.setCurrentPeg(score.getScoringPegAt(i));
+        }
     }
 }

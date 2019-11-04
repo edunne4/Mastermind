@@ -27,6 +27,7 @@ import game.GameManager;
 import game.code.CodePegEnum;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 
@@ -41,15 +42,14 @@ public class MastermindView {
 
     /** The peg objects that can be clicked on for choosing pegs */
     private List<CodePegHolderView> pegOptions = new ArrayList<>();
-    /** All row views in the board */
-    private List<BoardRowView> boardRows = new ArrayList<>();
 
     private BoardView boardView;
 
     private MenuDropdown menuDropdown;
+    private Button submitBtn;
 
-    public MastermindView() {
-        this.theModel = new MastermindModel();
+    public MastermindView(MastermindModel theModel) {
+        this.theModel = theModel;
         initSceneGraph();
     }
 
@@ -86,7 +86,7 @@ public class MastermindView {
 
 
         //create board of rows ****************************
-        boardView = new BoardView(theModel.getTheBoard().getNumRows(), theModel.getTheBoard().getNumPegs());
+        boardView = new BoardView(theModel.getTheGameManager().getTheBoard().getNumRows(), theModel.getTheGameManager().getTheBoard().getNumPegs());
         leftPane.getChildren().add(boardView);
         this.root.setLeft(leftPane);
         //************************************************
@@ -99,10 +99,17 @@ public class MastermindView {
         menuDropdown = new MenuDropdown();
         rightPane.getChildren().add(menuDropdown.getMenuBar());
 
-        Label playingPegsLabel = new Label("PLAYING PEGS");
+        //submit guess button
+        submitBtn = new Button("SUBMIT GUESS");
+        submitBtn.setDisable(true); //disable it to start off
+        rightPane.getChildren().add(submitBtn);
 
+
+
+        Label playingPegsLabel = new Label("PLAYING PEGS");
         rightPane.getChildren().add(playingPegsLabel);
 
+        // peg options *******************************************
         VBox pegOptionsBox = new VBox(20);
         pegOptionsBox.setAlignment(Pos.CENTER);
 
@@ -118,10 +125,18 @@ public class MastermindView {
             }
         }
         rightPane.getChildren().add(pegOptionsBox);
+        //********************************************************
         root.setRight(rightPane);
 
 
+    }
 
+    public void allowGuess(boolean enable){
+        submitBtn.setDisable(!enable);
+    }
+
+    public void activateRow(int rowIndex) {
+        boardView.getBoardRows().get(rowIndex).activate();
     }
 
     public BorderPane getRoot() {
@@ -140,7 +155,5 @@ public class MastermindView {
         return menuDropdown;
     }
 
-    public void activateRow(int rowIndex) {
-        boardView.getBoardRows()[rowIndex].activate();
-    }
+    public Button getSubmitBtn() { return submitBtn; }
 }
