@@ -19,11 +19,14 @@
  */
 package GUI;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 
 public class MenuDropdown extends MenuBar {
 
@@ -59,7 +62,7 @@ public class MenuDropdown extends MenuBar {
 
 
             //set default num pegs toggle
-            if (i == MastermindModel.DEFAULT_CODE_SIZE) {
+            if (i == MastermindModel.NUMBER_PEGS) {
                 numPegsToggleGroup.selectToggle(item);
             }
         }
@@ -73,7 +76,7 @@ public class MenuDropdown extends MenuBar {
             numTurnsToggleGroup.getToggles().add(item);
 
             //set default num turns toggle
-            if (i == MastermindModel.DEFAULT_NUMBER_TURNS) {
+            if (i == MastermindModel.NUMBER_TURNS) {
                 numTurnsToggleGroup.selectToggle(item);
             }
 
@@ -95,6 +98,9 @@ public class MenuDropdown extends MenuBar {
         menuBar.getMenus().add(settings);
         menuBar.getMenus().add(quit);
 
+        //style menubar
+        menuBar.setBackground(new Background(new BackgroundFill(Color.WHEAT,new CornerRadii(5), Insets.EMPTY)));
+        //menuBar.
 
     }
 

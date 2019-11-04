@@ -22,14 +22,13 @@ package GUI;
 import GUI.View.BoardRowView;
 import GUI.View.BoardView;
 import GUI.View.CodePegHolderView;
-import GUI.View.CodePegView;
-import game.GameManager;
 import game.code.CodePegEnum;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,35 +55,32 @@ public class MastermindView {
     private void initSceneGraph() {
         this.root = new BorderPane();
 
+        //set general styling attributes of the root
+        root.setBackground(new Background(new BackgroundFill(Color.DARKGREEN,CornerRadii.EMPTY,Insets.EMPTY)));
         root.setPadding(new Insets(15));
 
-        MastermindTitle title = new MastermindTitle(300,80);
+        //create the mastermind title. This will be placed at the top of the window.
+        createTitle();
+
+        //create the playing area of the game. This includes the scoring and playing peg holders.
+        createPlayingArea();
+
+        //create the playing pegs and menu. This will be placed on the right side of the window.
+        createPegsandMenu();
+    }
+
+    private void createTitle() {
+        MastermindTitle title = new MastermindTitle(300,40);
         VBox top = new VBox();
         top.getChildren().add(title);
 
         this.root.setTop(top);
         root.setAlignment(root.getTop(), Pos.CENTER);
         root.setMargin(root.getTop(), new Insets(15));
+    }
 
-        //left piece (board)
-        VBox leftPane = new VBox(20);
-        leftPane.setAlignment(Pos.CENTER);
-
-        //create labels *****************************
-        HBox labels = new HBox(20);
-        labels.setAlignment(Pos.CENTER);
-        Label scoreLabel = new Label("SCORE");
-        //scoreLabel.setAlignment(Pos.CENTER);
-        labels.getChildren().add(scoreLabel);
-        //create secret code hider TODO - this should be a stack a stack pane with the code behind it
-        Label secretCodeLabel = new Label("SECRET CODE");
-        //secretCodeLabel.setAlignment(Pos.CENTER);
-        labels.getChildren().add(secretCodeLabel);
-
-        leftPane.getChildren().add(labels);
-        //********************************************
-
-
+    private void createPegsandMenu() {
+        VBox rightPane = new VBox(50);
         //create board of rows ****************************
         boardView = new BoardView(theModel.getTheGameManager().getTheBoard().getNumRows(), theModel.getTheGameManager().getTheBoard().getNumPegs());
         leftPane.getChildren().add(boardView);
@@ -95,6 +91,7 @@ public class MastermindView {
         //do right pane (playing peg options)
         VBox rightPane = new VBox(20);
         //rightPane.setAlignment(Pos.CENTER);
+        rightPane.setPadding(new Insets(0,0,0,20));
 
         menuDropdown = new MenuDropdown();
         rightPane.getChildren().add(menuDropdown.getMenuBar());
@@ -127,16 +124,19 @@ public class MastermindView {
         rightPane.getChildren().add(pegOptionsBox);
         //********************************************************
         root.setRight(rightPane);
-
-
     }
 
-    public void allowGuess(boolean enable){
-        submitBtn.setDisable(!enable);
-    }
+    public void createPlayingArea() {
 
-    public void activateRow(int rowIndex) {
-        boardView.getBoardRows().get(rowIndex).activate();
+        VBox leftPane = new VBox(20);
+        leftPane.setPadding(new Insets(10));
+        leftPane.setBorder(new Border(new BorderStroke(Color.WHEAT, BorderStrokeStyle.SOLID,new CornerRadii(20),new BorderWidths(10))));
+        leftPane.setAlignment(Pos.CENTER);
+
+        //create board of rows ****************************
+        boardView = new BoardView(theModel.NUMBER_TURNS, theModel.NUMBER_PEGS);
+        leftPane.getChildren().add(boardView);
+        this.root.setLeft(leftPane);
     }
 
     public BorderPane getRoot() {
@@ -153,6 +153,14 @@ public class MastermindView {
 
     public MenuDropdown getMenuDropdown() {
         return menuDropdown;
+    }
+
+    public void activateRow(int rowIndex) {
+        boardView.getBoardRows().get(rowIndex).activate();
+    }
+
+    public void allowGuess(boolean enable){
+        submitBtn.setDisable(!enable);
     }
 
     public Button getSubmitBtn() { return submitBtn; }

@@ -3,7 +3,7 @@
  * Fall 2019
  * Instructor: Prof. Brian King
  *
- * Name: Ryan Bailis
+ * Name: Ryan Bailis and Ethan Dunne
  * Section: MWF 11am
  * Instructor: Professor Brian King
  * Date: 10/29/19
