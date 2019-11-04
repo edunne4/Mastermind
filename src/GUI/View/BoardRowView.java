@@ -160,7 +160,7 @@ public class BoardRowView extends HBox {
      * @return whether or not this row is in the active state or not
      */
     public boolean isActive() {
-        return state == RowState.ACTIVE;
+        return state == RowState.ACTIVE || state == RowState.READY_TO_BE_SET;
     }
 
     public void updateScore(Score score) {
