@@ -29,6 +29,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,9 +57,11 @@ public class MastermindView {
     private void initSceneGraph() {
         this.root = new BorderPane();
 
+        root.setBackground(new Background(new BackgroundFill(Color.DARKGREEN,CornerRadii.EMPTY,Insets.EMPTY)));
+
         root.setPadding(new Insets(15));
 
-        MastermindTitle title = new MastermindTitle(300,80);
+        MastermindTitle title = new MastermindTitle(300,40);
         VBox top = new VBox();
         top.getChildren().add(title);
 
@@ -68,22 +71,9 @@ public class MastermindView {
 
         //left piece (board)
         VBox leftPane = new VBox(20);
+        leftPane.setPadding(new Insets(10));
+        leftPane.setBorder(new Border(new BorderStroke(Color.WHEAT,BorderStrokeStyle.SOLID,new CornerRadii(20),new BorderWidths(10))));
         leftPane.setAlignment(Pos.CENTER);
-
-        //create labels *****************************
-        HBox labels = new HBox(20);
-        labels.setAlignment(Pos.CENTER);
-        Label scoreLabel = new Label("SCORE");
-        //scoreLabel.setAlignment(Pos.CENTER);
-        labels.getChildren().add(scoreLabel);
-        //create secret code hider TODO - this should be a stack a stack pane with the code behind it
-        Label secretCodeLabel = new Label("SECRET CODE");
-        //secretCodeLabel.setAlignment(Pos.CENTER);
-        labels.getChildren().add(secretCodeLabel);
-
-        leftPane.getChildren().add(labels);
-        //********************************************
-
 
         //create board of rows ****************************
         boardView = new BoardView(theModel.getTheBoard().getNumRows(), theModel.getTheBoard().getNumPegs());
@@ -93,15 +83,12 @@ public class MastermindView {
 
 
         //do right pane (playing peg options)
-        VBox rightPane = new VBox(20);
+        VBox rightPane = new VBox(50);
         //rightPane.setAlignment(Pos.CENTER);
+        rightPane.setPadding(new Insets(0,0,0,20));
 
         menuDropdown = new MenuDropdown();
         rightPane.getChildren().add(menuDropdown.getMenuBar());
-
-        Label playingPegsLabel = new Label("PLAYING PEGS");
-
-        rightPane.getChildren().add(playingPegsLabel);
 
         VBox pegOptionsBox = new VBox(20);
         pegOptionsBox.setAlignment(Pos.CENTER);

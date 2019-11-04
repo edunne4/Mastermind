@@ -2,6 +2,8 @@ package GUI;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class MastermindMain extends Application {

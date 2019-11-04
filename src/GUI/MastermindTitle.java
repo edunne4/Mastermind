@@ -46,7 +46,7 @@ public class MastermindTitle extends BorderPane {
         //------set the top row of lights------//
         HBox topLights = new HBox(LIGHT_SPACING);
         topLights.setAlignment(Pos.CENTER);
-        int numLightsTop = width / (LIGHT_SIZE+LIGHT_SIZE);
+        int numLightsTop = width / (LIGHT_SIZE+LIGHT_SPACING);
 
         for (int i = 0; i < numLightsTop; i++) {
             Circle light = new Circle(LIGHT_SIZE);
@@ -59,7 +59,7 @@ public class MastermindTitle extends BorderPane {
         //------set the bottom row of lights------//
         HBox bottomLights = new HBox(LIGHT_SPACING);
         bottomLights.setAlignment(Pos.CENTER);
-        int numLightsBottom = width / (LIGHT_SIZE+LIGHT_SIZE);
+        int numLightsBottom = width / (LIGHT_SIZE+LIGHT_SPACING);
 
         for (int i = 0; i < numLightsBottom; i++) {
             Circle light = new Circle(LIGHT_SIZE);
@@ -75,7 +75,7 @@ public class MastermindTitle extends BorderPane {
         VBox leftLights = new VBox(LIGHT_SPACING);
         leftLights.setAlignment(Pos.CENTER);
         leftLights.setPadding(new Insets(LIGHT_SPACING, 0, LIGHT_SPACING, 0));
-        int numLightsLeft = height / (LIGHT_SIZE+LIGHT_SIZE);
+        int numLightsLeft = height / (LIGHT_SIZE+LIGHT_SPACING) ;
 
         for (int i = 0; i < numLightsLeft; i++) {
             Circle light = new Circle(LIGHT_SIZE);
@@ -90,7 +90,7 @@ public class MastermindTitle extends BorderPane {
         VBox rightLights = new VBox(LIGHT_SPACING);
         rightLights.setAlignment(Pos.CENTER);
         rightLights.setPadding(new Insets(LIGHT_SPACING, 0, LIGHT_SPACING, 0));
-        int numLightsRight = height / (LIGHT_SIZE+LIGHT_SIZE);
+        int numLightsRight = height / (LIGHT_SIZE+LIGHT_SPACING) ;
 
         for (int i = 0; i < numLightsRight; i++) {
             Circle light = new Circle(LIGHT_SIZE);
@@ -104,10 +104,10 @@ public class MastermindTitle extends BorderPane {
         //create title pane
         Label titleLabel = new Label("MASTERMIND");
         titleLabel.setAlignment(Pos.CENTER);
-        titleLabel.setTextFill(Color.SEAGREEN);
+        titleLabel.setTextFill(Color.WHITE);
         titleLabel.setMaxWidth(width - (LIGHT_SIZE*2));
         titleLabel.setMaxHeight(height - (LIGHT_SIZE*2));
-        titleLabel.setFont(Font.font("Andale Mono", FontWeight.BOLD, 30));
+        titleLabel.setFont(Font.font("Andale Mono", FontWeight.BOLD, 40));
         //titleLabel.setBorder(new Border(new BorderStroke(Color.SEAGREEN, BorderStrokeStyle.SOLID, new CornerRadii(4), BorderWidths.DEFAULT)));
 
 

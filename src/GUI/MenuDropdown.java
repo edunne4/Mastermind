@@ -19,11 +19,15 @@
  */
 package GUI;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public class MenuDropdown extends MenuBar {
 
@@ -95,6 +99,9 @@ public class MenuDropdown extends MenuBar {
         menuBar.getMenus().add(settings);
         menuBar.getMenus().add(quit);
 
+        //style menubar
+        menuBar.setBackground(new Background(new BackgroundFill(Color.WHEAT,new CornerRadii(5), Insets.EMPTY)));
+        //menuBar.
 
     }
 
