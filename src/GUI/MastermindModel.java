@@ -26,10 +26,10 @@ import game.players.*;
 public class MastermindModel {
 
     /** Standard Mastermind has 12 guesses allowed */
-    protected static final int DEFAULT_NUMBER_TURNS = 12;
+    protected static int NUMBER_TURNS = 12; //the game default is 12
 
     /** There are 4 positions to be guessed */
-    protected static final int DEFAULT_CODE_SIZE = 4;
+    protected static int NUMBER_PEGS = 4; //the game default is 4
 
     protected static final int MIN_NUMBER_PEGS = 3;
     protected static final int MAX_NUMBER_PEGS = 8;
@@ -40,9 +40,17 @@ public class MastermindModel {
     private static GameManager theGameManager;
     private Board theBoard;
 
+    public static void setNumberTurns(int numberTurns) {
+        NUMBER_TURNS = numberTurns;
+    }
+
+    public static void setNumberPegs(int numberPegs) {
+        NUMBER_PEGS = numberPegs;
+    }
+
     public MastermindModel() {
         // Set up our board to be used between teh codemaker and codebreaker
-        theBoard = new Board(DEFAULT_NUMBER_TURNS, DEFAULT_CODE_SIZE);
+        theBoard = new Board(NUMBER_TURNS, NUMBER_PEGS);
 
         // Create an instance of {@link ConsoleCodeMaker} to score guess and report back to System.out
         CodeMaker codeMaker = new GUICodeMaker(theBoard);

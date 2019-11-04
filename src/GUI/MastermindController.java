@@ -25,6 +25,7 @@ import GUI.View.CodePegView;
 import game.code.CodePegEnum;
 import game.code.CodePegHolder;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.IntegerBinding;
 import javafx.scene.control.MenuItem;
 
 public class MastermindController {
@@ -103,14 +104,23 @@ public class MastermindController {
 
         //set the number of pegs
         for (MenuItem menuItem : theView.getMenuDropdown().getNumPegs().getItems()) {
-            menuItem.setOnAction(event ->
-                    System.out.println("The user now wants " + menuItem.getText() + " pegs."));
+            menuItem.setOnAction(event -> {
+                System.out.println("The user now wants " + menuItem.getText() + " pegs.");
+                theModel.setNumberPegs(Integer.parseInt(menuItem.getText()));
+                theView.createPlayingArea();
+
+            });
+
         }
 
         //set the number of turns
         for (MenuItem menuItem : theView.getMenuDropdown().getNumTurns().getItems()) {
-            menuItem.setOnAction(event ->
-                    System.out.println("The user now wants " + menuItem.getText() + " turns."));
+            menuItem.setOnAction(event -> {
+                System.out.println("The user now wants " + menuItem.getText() + " turns.");
+                theModel.setNumberTurns(Integer.parseInt(menuItem.getText()));
+                theView.createPlayingArea();
+                    });
+
         }
 
     }
