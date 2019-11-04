@@ -62,7 +62,7 @@ public class MenuDropdown extends MenuBar {
 
 
             //set default num pegs toggle
-            if (i == MastermindModel.NUMBER_PEGS) {
+            if (i == MastermindModel.getTheGameManager().getNumPegsForGuess()) {
                 numPegsToggleGroup.selectToggle(item);
             }
         }
@@ -76,7 +76,7 @@ public class MenuDropdown extends MenuBar {
             numTurnsToggleGroup.getToggles().add(item);
 
             //set default num turns toggle
-            if (i == MastermindModel.NUMBER_TURNS) {
+            if (i == MastermindModel.getTheGameManager().getNumRowsInGame()) {
                 numTurnsToggleGroup.selectToggle(item);
             }
 

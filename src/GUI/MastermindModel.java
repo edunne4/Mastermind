@@ -72,4 +72,12 @@ public class MastermindModel {
         theGameManager.playNextTurnWithGuess(sGuess);
         return theGameManager.getCurrentScore();
     }
+
+    public void setNumberPegs(int numPegs) {
+        theGameManager.getTheBoard().setNumPegs(numPegs);
+    }
+
+    public void setNumberTurns(int numTurns) {
+        theGameManager.getTheBoard().setNumRows(numTurns);
+    }
 }

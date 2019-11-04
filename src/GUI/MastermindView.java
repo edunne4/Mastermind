@@ -80,12 +80,12 @@ public class MastermindView {
     }
 
     private void createPegsandMenu() {
-        VBox rightPane = new VBox(50);
-        //create board of rows ****************************
-        boardView = new BoardView(theModel.getTheGameManager().getTheBoard().getNumRows(), theModel.getTheGameManager().getTheBoard().getNumPegs());
-        leftPane.getChildren().add(boardView);
-        this.root.setLeft(leftPane);
-        //************************************************
+//        VBox rightPane = new VBox(50);
+//        //create board of rows ****************************
+//        boardView = new BoardView(theModel.getTheGameManager().getTheBoard().getNumRows(), theModel.getTheGameManager().getTheBoard().getNumPegs());
+//        leftPane.getChildren().add(boardView);
+//        this.root.setLeft(leftPane);
+//        //************************************************
 
 
         //do right pane (playing peg options)
@@ -134,7 +134,7 @@ public class MastermindView {
         leftPane.setAlignment(Pos.CENTER);
 
         //create board of rows ****************************
-        boardView = new BoardView(theModel.NUMBER_TURNS, theModel.NUMBER_PEGS);
+        boardView = new BoardView(theModel.getTheGameManager().getTheBoard().getNumRows(), theModel.getTheGameManager().getTheBoard().getNumPegs());
         leftPane.getChildren().add(boardView);
         this.root.setLeft(leftPane);
     }
