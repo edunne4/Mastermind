@@ -21,9 +21,6 @@ package GUI;
 
 import GUI.View.*;
 import game.code.CodePegEnum;
-import game.code.CodePegHolder;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.IntegerBinding;
 import game.score.Score;
 import javafx.scene.control.MenuItem;
 
@@ -35,6 +32,11 @@ public class MastermindController {
     private CodePegEnum selectedPeg = CodePegEnum.NONE;
 
 
+    /**
+     * Explicit Constructor to set up event handlers between the view and the model
+     * @param theView - the GUI view controller
+     * @param theModel - the data of the mastermind game going on behind the scenes
+     */
     public MastermindController(MastermindView theView, MastermindModel theModel) {
         this.theView = theView;
         this.theModel = theModel;
@@ -47,6 +49,9 @@ public class MastermindController {
 
     }
 
+    /**
+     * make the peg options selectable and make the board rows clickable
+     */
     private void pegEventHandlers() {
 
         //make each peg option in the peg options have an on click event
@@ -87,11 +92,12 @@ public class MastermindController {
                 });
 
             }
-            //set up binding for each row to show whether or not they are active
-            //row.isActiveRowProperty().bind;
         }
     }
 
+    /**
+     * Set up event for when the submit button is pressed
+     */
     private void buttonEventHandler() {
         theView.getSubmitBtn().setOnAction(event -> {
             //disable the button
@@ -114,20 +120,20 @@ public class MastermindController {
             }else{ //keep playing
                 theView.activateRow(theModel.getTheGameManager().getNumTurnsPlayed());
             }
-
-
-
         });
     }
 
 
+    /**
+     * Handle the pressing of the exit button
+     */
     private void exitEventHandler() {
-
         theView.getMenuDropdown().getQuit().setOnAction( event -> System.exit(0));
-
-
     }
 
+    /**
+     * handle when different options are chosen for numPegs and numRows
+     */
     private void menuEventHandlers() {
 
         //set the number of pegs
@@ -138,7 +144,7 @@ public class MastermindController {
                 theView.createPlayingArea();
 
                 //get game ready to be played again
-                resetGame();
+                theView.activateRow(theModel.getTheGameManager().getNumTurnsPlayed());
 
                 //recreate eventhandlers for all pegs
                 pegEventHandlers();
@@ -152,8 +158,8 @@ public class MastermindController {
                 System.out.println("The user now wants " + menuItem.getText() + " turns.");
                 theModel.setNumberTurns(Integer.parseInt(menuItem.getText()));
                 theView.createPlayingArea();
-                //get game ready to be played again
-                resetGame();
+                //get game ready to be played again with the new number of pegs
+                theView.activateRow(theModel.getTheGameManager().getNumTurnsPlayed());
 
                 //recreate eventhandlers for all pegs
                 pegEventHandlers();
@@ -163,13 +169,11 @@ public class MastermindController {
         }
     }
 
-    private void resetGame(){
-        //reset the view's game
-        BoardRowView currentRowView = theView.getBoardView().getRowViewAt(theModel.getTheGameManager().getNumTurnsPlayed());
-        currentRowView.activate();
 
-    }
-
+    /**
+     * Helper method to select a peg option when it is clicked
+     * @param pegClicked - the peg holder view that was clicked
+     */
     private void selectPeg(CodePegHolderView pegClicked){
         //deselect all other pegs
         for (CodePegHolderView pegOption : theView.getPegOptions()) {
@@ -179,6 +183,10 @@ public class MastermindController {
         pegClicked.select();
     }
 
+    /**
+     * Helper method to deselect a peg option when it is clicked
+     * @param pegClicked - the peg option chosen to be deselected
+     */
     private void deselectPeg(CodePegHolderView pegClicked){
         selectedPeg = CodePegEnum.NONE;
         pegClicked.deselect();
