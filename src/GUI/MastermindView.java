@@ -86,6 +86,7 @@ public class MastermindView {
 
         //do right pane (playing peg options)
         VBox rightPane = new VBox(20);
+        rightPane.setAlignment(Pos.TOP_CENTER);
         //rightPane.setAlignment(Pos.CENTER);
         rightPane.setPadding(new Insets(0,0,0,20));
 
@@ -96,11 +97,6 @@ public class MastermindView {
         submitBtn = new Button("SUBMIT GUESS");
         submitBtn.setDisable(true); //disable it to start off
         rightPane.getChildren().add(submitBtn);
-
-
-
-        Label playingPegsLabel = new Label("PLAYING PEGS");
-        rightPane.getChildren().add(playingPegsLabel);
 
         // peg options *******************************************
         VBox pegOptionsBox = new VBox(20);
