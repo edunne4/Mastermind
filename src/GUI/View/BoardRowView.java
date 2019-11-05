@@ -54,9 +54,8 @@ public class BoardRowView extends HBox {
 
 
     }
+
     private RowState state = RowState.UNSET;
-    /** A boolean for whether or not this is the current row being played or not. */
-    //private SimpleBooleanProperty isActiveRow = new SimpleBooleanProperty(false);
 
     private List<CodePegHolderView> codePegHolders = new ArrayList<>();
 

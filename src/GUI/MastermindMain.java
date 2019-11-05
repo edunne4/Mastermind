@@ -33,23 +33,5 @@ private MastermindView theView;
         primaryStage.sizeToScene();
         primaryStage.show();
 
-
-        //put this code in the "you won" function
-//        WinnerWindow winner = new WinnerWindow();
-//
-//        Stage winnerStage = new Stage();
-//
-//        winnerStage.setScene(new Scene(winner.getRoot()));
-//        winnerStage.setTitle("Winner winner, chicken dinner!");
-//        winnerStage.sizeToScene();
-//        winnerStage.show();
-        /////////////////////////
-
-
-
-        //put this code in the "you lost" function
-
-        /////////////////////////
-
     }
 }

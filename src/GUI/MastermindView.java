@@ -19,6 +19,8 @@
  */
 package GUI;
 
+import GUI.PopupWindows.LoserWindow;
+import GUI.PopupWindows.WinnerWindow;
 import GUI.View.*;
 import game.code.CodePegEnum;
 import javafx.geometry.Insets;
