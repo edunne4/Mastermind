@@ -44,7 +44,7 @@ public class MastermindController {
         menuEventHandlers();
         exitEventHandler();
         buttonEventHandler();
-        doScrollPaneBindings();
+        //doScrollPaneBindings();
 
         theView.activateRow(0);
 
@@ -149,7 +149,7 @@ public class MastermindController {
 
                 //recreate eventhandlers for all pegs
                 pegEventHandlers();
-                doScrollPaneBindings();
+                //doScrollPaneBindings();
             });
 
         }
@@ -165,7 +165,7 @@ public class MastermindController {
 
                 //recreate eventhandlers for all pegs
                 pegEventHandlers();
-                doScrollPaneBindings();
+                //doScrollPaneBindings();
 
             });
 

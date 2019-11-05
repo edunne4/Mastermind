@@ -127,6 +127,12 @@ public class MastermindView {
         board.setPadding(new Insets(10));
         board.setBorder(new Border(new BorderStroke(Color.WHEAT, BorderStrokeStyle.SOLID,new CornerRadii(20),new BorderWidths(10))));
         board.setAlignment(Pos.TOP_CENTER);
+        board.setBackground(new Background(new BackgroundFill(Color.DARKGREEN,new CornerRadii(0),new Insets(0))));
+        scroller.setBackground(new Background(new BackgroundFill(Color.DARKGREEN,new CornerRadii(0),new Insets(0))));
+
+        //get rid of scroll bars
+        scroller.hbarPolicyProperty().setValue(ScrollPane.ScrollBarPolicy.NEVER);
+        scroller.vbarPolicyProperty().setValue(ScrollPane.ScrollBarPolicy.NEVER);
 
         //create board of rows ****************************
         boardView = new BoardView(theModel.getTheGameManager().getTheBoard().getNumRows(), theModel.getTheGameManager().getTheBoard().getNumPegs());

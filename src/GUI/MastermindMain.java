@@ -33,5 +33,6 @@ private MastermindView theView;
         primaryStage.sizeToScene();
         primaryStage.show();
 
+
     }
 }
