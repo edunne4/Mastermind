@@ -31,9 +31,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
 
-public class MastermindTitle extends BorderPane {
+public class FancyTextTitle extends BorderPane {
 
-    private final static int LIGHT_SPACING = 10;
+    private final static int LIGHT_SPACING = 5;
     private final static int LIGHT_SIZE = 10;
 
     private final static Color LIGHT_COLOR_OFF = Color.GOLDENROD;
@@ -46,7 +46,7 @@ public class MastermindTitle extends BorderPane {
     private String text;
 
 
-    public MastermindTitle(int width, int height, String text) {
+    public FancyTextTitle(int width, int height, String text) {
         this.width = width;
         this.height = height;
         this.text = text;
