@@ -107,13 +107,12 @@ public class MastermindController {
             //check for gameover
             if(theModel.getTheGameManager().isDone()){
                 if(theModel.getTheGameManager().isWin()) {
-                    //theView.doWinWindow();
+                    theView.showWinMenu();
                 }else{
-                    //theView.doLoseWindow();
+                    theView.showLoseMenu();
                 }
             }else{ //keep playing
-                //tell next row to activate //TODO - handle index out of bounds exception
-                theView.getBoardView().getRowViewAt(theModel.getTheGameManager().getNumTurnsPlayed()).activate();
+                theView.activateRow(theModel.getTheGameManager().getNumTurnsPlayed());
             }
 
 
