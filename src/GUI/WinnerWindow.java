@@ -24,27 +24,49 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
+/**
+ * A class to create a window to be shown when the user wins the game.
+ */
 public class WinnerWindow {
 
+    /** the main scene graph of the winner window **/
     VBox root;
+
+    /** the quit button that will allow the user to quit the game**/
     Button quitButton;
+
+    /** the button that will allow the user to play again **/
     Button playAgainButton;
 
     public WinnerWindow() {
 
+        //setup the root as a VBox, add a FancyTextTitle and set the background parameters
+        setupRoot();
+
+        //create the buttons and add them to the root
+        createButtons();
+
+        eventHandlers();
+
+    }
+
+    /**
+     * A helper function that will setup the root
+     */
+    private void setupRoot() {
         root = new VBox(20);
         root.getChildren().add(new FancyTextTitle(300,100, "YOU WON!"));
         root.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, CornerRadii.EMPTY, Insets.EMPTY)));
         root.setPadding(new Insets(15));
+    }
 
-
+    /**
+     * A helper function will add the buttons to the root
+     */
+    private void createButtons() {
         quitButton = new Button("Close");
         playAgainButton = new Button("Play again");
-
         root.getChildren().add(new HBox(20,quitButton,playAgainButton));
-
-        eventHandlers();
-
     }
 
     private void eventHandlers() {
