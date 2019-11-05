@@ -41,8 +41,12 @@ public class MastermindModel {
     private static GameManager theGameManager;
 
     public MastermindModel() {
+        createNewGame(DEFAULT_NUMBER_TURNS, DEFAULT_CODE_SIZE);
+    }
+
+    public void createNewGame(int numTurns, int numPegs){
         // Set up our board to be used between teh codemaker and codebreaker
-        Board theBoard = new Board(DEFAULT_NUMBER_TURNS, DEFAULT_CODE_SIZE);
+        Board theBoard = new Board(numTurns, numPegs);
 
         // Create an instance of {@link ConsoleCodeMaker} to score guess and report back to System.out
         CodeMaker codeMaker = new GUICodeMaker(theBoard);
@@ -54,30 +58,24 @@ public class MastermindModel {
         // and a codeBreaker
         theGameManager = new GameManager(theBoard, codeMaker, codeBreaker);
         System.out.println(codeMaker.getSecretCode().codeToString());
-
     }
 
     public static GameManager getTheGameManager() {
         return theGameManager;
     }
 
-    public void startGame(){
-        System.out.println("Starting Game");
-    }
-//    public void playNextTurn(){
-//        theGameManager.playNextTurn();
-//    }
 
     public Score makeGuess(String sGuess) {
         theGameManager.playNextTurnWithGuess(sGuess);
         return theGameManager.getCurrentScore();
     }
 
+
     public void setNumberPegs(int numPegs) {
-        theGameManager.getTheBoard().setNumPegs(numPegs);
+        createNewGame(theGameManager.getTheBoard().getNumRows(), numPegs);
     }
 
     public void setNumberTurns(int numTurns) {
-        theGameManager.getTheBoard().setNumRows(numTurns);
+        createNewGame(numTurns, theGameManager.getTheBoard().getNumPegs());
     }
 }
