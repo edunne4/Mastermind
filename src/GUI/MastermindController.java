@@ -44,6 +44,7 @@ public class MastermindController {
         menuEventHandlers();
         exitEventHandler();
         buttonEventHandler();
+        doScrollPaneBindings();
 
         theView.activateRow(0);
 
@@ -148,6 +149,7 @@ public class MastermindController {
 
                 //recreate eventhandlers for all pegs
                 pegEventHandlers();
+                doScrollPaneBindings();
             });
 
         }
@@ -163,10 +165,15 @@ public class MastermindController {
 
                 //recreate eventhandlers for all pegs
                 pegEventHandlers();
+                doScrollPaneBindings();
 
             });
 
         }
+    }
+
+    private void doScrollPaneBindings() {
+        theView.getScroller().prefViewportWidthProperty().bind(theView.getRoot().widthProperty().multiply(0.6));
     }
 
 
