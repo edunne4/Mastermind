@@ -169,4 +169,12 @@ public class BoardRowView extends HBox {
             pegHolderView.setCurrentPeg(score.getScoringPegAt(i));
         }
     }
+
+    public HBox getPegRow() {
+        return pegRow;
+    }
+
+    public HBox getScoreRow() {
+        return scoreRow;
+    }
 }

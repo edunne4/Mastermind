@@ -19,7 +19,7 @@
  */
 package GUI;
 
-import game.GameManager;
+import game.*;
 import game.board.Board;
 import game.players.*;
 import game.score.Score;

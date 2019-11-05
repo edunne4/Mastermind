@@ -19,9 +19,7 @@
  */
 package GUI;
 
-import GUI.View.BoardRowView;
-import GUI.View.BoardView;
-import GUI.View.CodePegHolderView;
+import GUI.View.*;
 import game.code.CodePegEnum;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -29,6 +27,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +69,7 @@ public class MastermindView {
     }
 
     private void createTitle() {
-        MastermindTitle title = new MastermindTitle(300,40);
+        FancyTextTitle title = new FancyTextTitle(300,45, "MASTERMIND");
         VBox top = new VBox();
         top.getChildren().add(title);
 
@@ -80,13 +79,6 @@ public class MastermindView {
     }
 
     private void createPegsandMenu() {
-//        VBox rightPane = new VBox(50);
-//        //create board of rows ****************************
-//        boardView = new BoardView(theModel.getTheGameManager().getTheBoard().getNumRows(), theModel.getTheGameManager().getTheBoard().getNumPegs());
-//        leftPane.getChildren().add(boardView);
-//        this.root.setLeft(leftPane);
-//        //************************************************
-
 
         //do right pane (playing peg options)
         VBox rightPane = new VBox(20);

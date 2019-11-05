@@ -19,8 +19,7 @@
  */
 package GUI;
 
-import GUI.View.BoardRowView;
-import GUI.View.CodePegHolderView;
+import GUI.View.*;
 import game.code.CodePegEnum;
 import game.code.CodePegHolder;
 import javafx.beans.binding.Bindings;

@@ -2,8 +2,6 @@ package GUI;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class MastermindMain extends Application {
@@ -30,12 +28,35 @@ private MastermindView theView;
 
         Scene scene = new Scene(theView.getRoot());
 
-        System.out.println(javafx.scene.text.Font.getFamilies());
-
-
         primaryStage.setTitle("Mastermind");
         primaryStage.setScene(scene);
         primaryStage.sizeToScene();
         primaryStage.show();
+
+
+        //put this code in the "you won" function
+        WinnerWindow winner = new WinnerWindow();
+
+        Stage winnerStage = new Stage();
+
+        winnerStage.setScene(new Scene(winner.getRoot()));
+        winnerStage.setTitle("Winner winner, chicken dinner!");
+        winnerStage.sizeToScene();
+        winnerStage.show();
+        /////////////////////////
+
+
+
+        //put this code in the "you lost" function
+        LooserWindow looser = new LooserWindow();
+
+        Stage looserStage = new Stage();
+
+        looserStage.setScene(new Scene(looser.getRoot()));
+        looserStage.setTitle("Awww. You lost!");
+        looserStage.sizeToScene();
+        looserStage.show();
+        /////////////////////////
+
     }
 }
