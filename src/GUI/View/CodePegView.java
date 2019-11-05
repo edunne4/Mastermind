@@ -33,8 +33,6 @@ public class CodePegView extends Sphere {
 
     private CodePegEnum pegType = CodePegEnum.NONE;
 
-
-    //TODO possibly change the parameter to the paint color rather than enum to decrease class coupling between this and CodePegEnum
     public CodePegView(CodePegEnum codePeg) {
         super(PEG_RADIUS);
         this.pegType = codePeg;
@@ -44,7 +42,6 @@ public class CodePegView extends Sphere {
         material.setDiffuseColor(codePeg.getColor());
         material.setSpecularColor(Color.DARKGRAY);
         this.setMaterial(material);
-
 
     }
 

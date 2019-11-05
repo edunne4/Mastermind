@@ -21,27 +21,22 @@ package GUI.View;
 import game.score.ScorePegEnum;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
+import javafx.scene.paint.PhongMaterial;
+import javafx.scene.shape.Sphere;
 
-public class ScorePegView extends Circle {
-    private static final double INIT_RADIUS = 5;
+public class ScorePegView extends Sphere {
+
+    private static final double PEG_RADIUS = 5;
     private ScorePegEnum pegType = ScorePegEnum.NONE;
 
     public ScorePegView(ScorePegEnum scorePeg) {
-        super(INIT_RADIUS,scorePeg.getColor());
+        super(PEG_RADIUS);
         this.pegType = scorePeg;
-        setupEffects();
-    }
 
-    /**
-     * Add a drop shadow to the rectangles.
-     */
-    private void setupEffects() {
-        DropShadow ds = new DropShadow();
-        ds.setOffsetX(4.0);
-        ds.setOffsetY(4.0);
-        ds.setColor(Color.BLACK);
-        this.setEffect(ds);
+        PhongMaterial material = new PhongMaterial();
+        material.setDiffuseColor(scorePeg.getColor());
+        material.setSpecularColor(Color.DARKGRAY);
+        this.setMaterial(material);
     }
 
     public ScorePegEnum getType() {
