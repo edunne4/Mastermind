@@ -26,6 +26,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -47,6 +48,8 @@ public class MastermindView {
 
     private MenuDropdown menuDropdown;
     private Button submitBtn;
+    private ScrollPane scroller;
+
 
     public MastermindView(MastermindModel theModel) {
         this.theModel = theModel;
@@ -121,16 +124,19 @@ public class MastermindView {
     }
 
     public void createPlayingArea() {
-
-        VBox leftPane = new VBox(20);
-        leftPane.setPadding(new Insets(10));
-        leftPane.setBorder(new Border(new BorderStroke(Color.WHEAT, BorderStrokeStyle.SOLID,new CornerRadii(20),new BorderWidths(10))));
-        leftPane.setAlignment(Pos.TOP_CENTER);
+        scroller = new ScrollPane();
+        VBox board = new VBox(20);
+        board.setPadding(new Insets(10));
+        board.setBorder(new Border(new BorderStroke(Color.WHEAT, BorderStrokeStyle.SOLID,new CornerRadii(20),new BorderWidths(10))));
+        board.setAlignment(Pos.TOP_CENTER);
 
         //create board of rows ****************************
         boardView = new BoardView(theModel.getTheGameManager().getTheBoard().getNumRows(), theModel.getTheGameManager().getTheBoard().getNumPegs());
-        leftPane.getChildren().add(boardView);
-        this.root.setLeft(leftPane);
+        board.getChildren().add(boardView);
+        scroller.setContent(board);
+        scroller.setPrefViewportHeight(100);
+        //scroller.setMinViewportWidth(250);
+        this.root.setLeft(scroller);
     }
 
     public BorderPane getRoot() {
@@ -182,4 +188,8 @@ public class MastermindView {
     }
 
     public Button getSubmitBtn() { return submitBtn; }
+
+    public ScrollPane getScroller() {
+        return scroller;
+    }
 }
