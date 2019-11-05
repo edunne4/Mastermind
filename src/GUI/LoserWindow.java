@@ -28,14 +28,14 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-public class LooserWindow {
+public class LoserWindow {
 
     VBox root;
     Button quitButton;
     Button playAgainButton;
     BoardRowView winningPegs;
 
-    public LooserWindow() {
+    public LoserWindow() {
 
         root = new VBox(20);
         root.getChildren().add(new FancyTextTitle(300,100, "YOU LOST"));

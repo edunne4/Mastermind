@@ -19,6 +19,7 @@ package game;
 import game.board.Board;
 import game.players.CodeBreaker;
 import game.players.CodeMaker;
+import game.players.GUICodeMaker;
 import game.score.Score;
 
 /**

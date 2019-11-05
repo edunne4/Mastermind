@@ -23,10 +23,12 @@ import GUI.View.*;
 import game.code.CodePegEnum;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 
 import java.util.ArrayList;
@@ -123,7 +125,7 @@ public class MastermindView {
         VBox leftPane = new VBox(20);
         leftPane.setPadding(new Insets(10));
         leftPane.setBorder(new Border(new BorderStroke(Color.WHEAT, BorderStrokeStyle.SOLID,new CornerRadii(20),new BorderWidths(10))));
-        leftPane.setAlignment(Pos.CENTER);
+        leftPane.setAlignment(Pos.TOP_CENTER);
 
         //create board of rows ****************************
         boardView = new BoardView(theModel.getTheGameManager().getTheBoard().getNumRows(), theModel.getTheGameManager().getTheBoard().getNumPegs());
@@ -139,6 +141,28 @@ public class MastermindView {
         return pegOptions;
     }
 
+    public void showWinMenu(){
+        WinnerWindow winner = new WinnerWindow();
+
+        Stage winnerStage = new Stage();
+
+        winnerStage.setScene(new Scene(winner.getRoot()));
+        winnerStage.setTitle("Winner winner, chicken dinner!");
+        winnerStage.sizeToScene();
+        winnerStage.show();
+    }
+
+    public void showLoseMenu(){
+        LoserWindow loser = new LoserWindow();
+
+        Stage looserStage = new Stage();
+
+        looserStage.setScene(new Scene(loser.getRoot()));
+        looserStage.setTitle("Awww. You lost!");
+        looserStage.sizeToScene();
+        looserStage.show();
+    }
+
     public BoardView getBoardView() {
         return boardView;
     }
@@ -148,7 +172,9 @@ public class MastermindView {
     }
 
     public void activateRow(int rowIndex) {
-        boardView.getBoardRows().get(rowIndex).activate();
+        if(rowIndex < boardView.getBoardRows().size()) {
+            boardView.getBoardRows().get(rowIndex).activate();
+        }
     }
 
     public void allowGuess(boolean enable){

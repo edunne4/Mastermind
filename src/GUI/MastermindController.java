@@ -43,7 +43,6 @@ public class MastermindController {
         exitEventHandler();
         buttonEventHandler();
 
-        theModel.startGame();
         theView.activateRow(0);
 
     }
@@ -105,8 +104,17 @@ public class MastermindController {
             currentRowView.updateScore(scoreForThisGuess);
             currentRowView.confirmPegs(); //changes the state from active to set
 
-            //tell next row to activate //TODO - handle index out of bounds exception
-            theView.getBoardView().getRowViewAt(theModel.getTheGameManager().getNumTurnsPlayed()).activate();
+            //check for gameover
+            if(theModel.getTheGameManager().isDone()){
+                if(theModel.getTheGameManager().isWin()) {
+                    theView.showWinMenu();
+                }else{
+                    theView.showLoseMenu();
+                }
+            }else{ //keep playing
+                theView.activateRow(theModel.getTheGameManager().getNumTurnsPlayed());
+            }
+
 
 
         });
@@ -129,6 +137,11 @@ public class MastermindController {
                 theModel.setNumberPegs(Integer.parseInt(menuItem.getText()));
                 theView.createPlayingArea();
 
+                //get game ready to be played again
+                resetGame();
+
+                //recreate eventhandlers for all pegs
+                pegEventHandlers();
             });
 
         }
@@ -139,9 +152,21 @@ public class MastermindController {
                 System.out.println("The user now wants " + menuItem.getText() + " turns.");
                 theModel.setNumberTurns(Integer.parseInt(menuItem.getText()));
                 theView.createPlayingArea();
-                    });
+                //get game ready to be played again
+                resetGame();
+
+                //recreate eventhandlers for all pegs
+                pegEventHandlers();
+
+            });
 
         }
+    }
+
+    private void resetGame(){
+        //reset the view's game
+        BoardRowView currentRowView = theView.getBoardView().getRowViewAt(theModel.getTheGameManager().getNumTurnsPlayed());
+        currentRowView.activate();
 
     }
 
