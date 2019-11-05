@@ -43,7 +43,6 @@ public class MastermindController {
         exitEventHandler();
         buttonEventHandler();
 
-        theModel.startGame();
         theView.activateRow(0);
 
     }
@@ -105,8 +104,18 @@ public class MastermindController {
             currentRowView.updateScore(scoreForThisGuess);
             currentRowView.confirmPegs(); //changes the state from active to set
 
-            //tell next row to activate //TODO - handle index out of bounds exception
-            theView.getBoardView().getRowViewAt(theModel.getTheGameManager().getNumTurnsPlayed()).activate();
+            //check for gameover
+            if(theModel.getTheGameManager().isDone()){
+                if(theModel.getTheGameManager().isWin()) {
+                    //theView.doWinWindow();
+                }else{
+                    //theView.doLoseWindow();
+                }
+            }else{ //keep playing
+                //tell next row to activate //TODO - handle index out of bounds exception
+                theView.getBoardView().getRowViewAt(theModel.getTheGameManager().getNumTurnsPlayed()).activate();
+            }
+
 
 
         });
@@ -129,6 +138,11 @@ public class MastermindController {
                 theModel.setNumberPegs(Integer.parseInt(menuItem.getText()));
                 theView.createPlayingArea();
 
+                //get game ready to be played again
+                resetGame();
+
+                //recreate eventhandlers for all pegs
+                pegEventHandlers();
             });
 
         }
@@ -139,9 +153,24 @@ public class MastermindController {
                 System.out.println("The user now wants " + menuItem.getText() + " turns.");
                 theModel.setNumberTurns(Integer.parseInt(menuItem.getText()));
                 theView.createPlayingArea();
-                    });
+                //get game ready to be played again
+                resetGame();
+
+                //recreate eventhandlers for all pegs
+                pegEventHandlers();
+
+            });
 
         }
+    }
+
+    private void resetGame(){
+        //reset the model's game
+        //theModel.getTheGameManager().initNewGame();
+
+        //reset the view's game
+        BoardRowView currentRowView = theView.getBoardView().getRowViewAt(theModel.getTheGameManager().getNumTurnsPlayed());
+        currentRowView.activate();
 
     }
 
