@@ -55,12 +55,16 @@ public class BoardRowView extends HBox {
 
     }
 
+    /** The state of the row. This will be used to determine and display which row is active */
     private RowState state = RowState.UNSET;
 
+    /** a list of CodePegHolderView that will be stored as a part of the BoardRowView */
     private List<CodePegHolderView> codePegHolders = new ArrayList<>();
 
+    /** an HBox to hold the pegRow (the playing pegs) */
     private HBox pegRow;
 
+    /** an HBox to hold the scoreRow (the scoring pegs) */
     private HBox scoreRow;
 
     /**
@@ -74,23 +78,26 @@ public class BoardRowView extends HBox {
      * Explicit constructor for showing a specific row
      * @param row the row to show
      */
+
     public BoardRowView(RowOnBoard row) {
         scoreRow = new HBox(10);
         pegRow = new HBox(10);
         this.setSpacing(10);
 
-
         Score score = row.getScore();
+
         //create empty scoring pegs
         for (int i = 0; i < row.getCode().getCodeSize(); i++) {
             scoreRow.getChildren().add(new ScorePegHolderView(score.getScoringPegAt(i)));
         }
 
         Code code = row.getCode();
+
         //create empty pegs
         for (int i = 0; i < row.getCode().getCodeSize(); i++) {
             codePegHolders.add(new CodePegHolderView(code.getPegAt(i), this));
         }
+
         pegRow.getChildren().addAll(codePegHolders);
         pegRow.setBorder(new Border(new BorderStroke(state.getIndicatorColor(), BorderStrokeStyle.SOLID, new CornerRadii(4), BorderWidths.DEFAULT)));
 
@@ -102,6 +109,10 @@ public class BoardRowView extends HBox {
         return codePegHolders;
     }
 
+    /**
+     * A method to determine if the row is full or not. Based on this, the border color of the row will be set.
+     * @return a boolean. True if the row is full, false if the row is not full.
+     */
     public boolean isRowFull(){
         for (Node child : pegRow.getChildren()) {
             CodePegHolderView pegHolder = (CodePegHolderView) child;
@@ -115,6 +126,9 @@ public class BoardRowView extends HBox {
         return true;
     }
 
+    /**
+     * Set the state of the row to active
+     */
     public void activate(){
         state = RowState.ACTIVE;
         updateBorderColor();
@@ -153,8 +167,6 @@ public class BoardRowView extends HBox {
         updateBorderColor();
     }
 
-
-
     /**
      * @return whether or not this row is in the active state or not
      */
@@ -162,6 +174,10 @@ public class BoardRowView extends HBox {
         return state == RowState.ACTIVE || state == RowState.READY_TO_BE_SET;
     }
 
+    /**
+     * Takes in a score from the model and sets the score visually in the view
+     * @param score the score to set on the view
+     */
     public void updateScore(Score score) {
         for (int i = 0; i < scoreRow.getChildren().size(); i++) {
             ScorePegHolderView pegHolderView = (ScorePegHolderView) scoreRow.getChildren().get(i);
@@ -173,7 +189,4 @@ public class BoardRowView extends HBox {
         return pegRow;
     }
 
-    public HBox getScoreRow() {
-        return scoreRow;
-    }
 }

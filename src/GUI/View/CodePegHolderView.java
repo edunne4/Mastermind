@@ -27,7 +27,6 @@ import javafx.scene.shape.Circle;
 
 public class CodePegHolderView extends StackPane {
 
-
     private BoardRowView rowThisIsIn = null;
     private CodePegView currentPeg;
 
@@ -38,14 +37,8 @@ public class CodePegHolderView extends StackPane {
         super();
         //create empty black circle
         this.getChildren().add(new Circle(CodePegView.PEG_RADIUS*CodePegView.PEG_HOLE_SCALE_FACTOR, Color.BLACK));
-//        Circle clickCircle = new Circle(CodePegView.INIT_RADIUS+2, Color.BLUEVIOLET);
-//        clickCircle.setOpacity(0.2);
-        //add a transparent circle for clicking on and to prevent size changes of a row
         this.getChildren().add(new Circle(CodePegView.PEG_RADIUS *CodePegView.PEG_SELECTED_SCALE_FACTOR, Color.TRANSPARENT));
 
-//        //get border set up
-//        this.select();
-//        this.deselect();
     }
 
     /**

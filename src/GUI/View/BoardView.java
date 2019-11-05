@@ -29,7 +29,6 @@ public class BoardView extends VBox {
     /** All row views in the board */
     private List<BoardRowView> boardRows = new ArrayList<>();
 
-
     /**
      * Creates a VBox layout with spacing = 0 and alignment at TOP_LEFT.
      */
