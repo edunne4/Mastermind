@@ -50,6 +50,8 @@ public class ScorePegHolderView extends StackPane {
     public void setCurrentPeg(ScorePegEnum newPeg){
         setCurrentPeg(new ScorePegView(newPeg));
     }
+
+
     public void setCurrentPeg(ScorePegView newPegView) {
 
         //remove the old peg
