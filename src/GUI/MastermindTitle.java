@@ -40,8 +40,16 @@ public class MastermindTitle extends BorderPane {
     private final static Color LIGHT_COLOR_ON = Color.GOLD;
     private final static int LIGHT_FLASH_SPEED = 500; //ms transition time between the colors
 
+    //window parameters
+    private int width;
+    private int height;
+    private String text;
 
-    public MastermindTitle(int width, int height) {
+
+    public MastermindTitle(int width, int height, String text) {
+        this.width = width;
+        this.height = height;
+        this.text = text;
 
         //------set the top row of lights------//
         HBox topLights = new HBox(LIGHT_SPACING);
@@ -65,7 +73,6 @@ public class MastermindTitle extends BorderPane {
             Circle light = new Circle(LIGHT_SIZE);
             startFlashing(light, i);
             bottomLights.getChildren().add(light);
-
         }
 
         this.setBottom(bottomLights);
@@ -81,7 +88,6 @@ public class MastermindTitle extends BorderPane {
             Circle light = new Circle(LIGHT_SIZE);
             startFlashing(light, i);
             leftLights.getChildren().add(light);
-
         }
 
         this.setLeft(leftLights);
@@ -102,17 +108,21 @@ public class MastermindTitle extends BorderPane {
 
         //---set the center text---//
         //create title pane
-        Label titleLabel = new Label("MASTERMIND");
+        createTitlePane(this.text);
+
+    }
+
+    private void createTitlePane(String text) {
+        Label titleLabel = new Label(text);
         titleLabel.setAlignment(Pos.CENTER);
         titleLabel.setTextFill(Color.WHITE);
-        titleLabel.setMaxWidth(width - (LIGHT_SIZE*2));
-        titleLabel.setMaxHeight(height - (LIGHT_SIZE*2));
+        titleLabel.setMaxWidth(this.width - (LIGHT_SIZE*2));
+        titleLabel.setMaxHeight(this.height - (LIGHT_SIZE*2));
         titleLabel.setFont(Font.font("Andale Mono", FontWeight.BOLD, 40));
         //titleLabel.setBorder(new Border(new BorderStroke(Color.SEAGREEN, BorderStrokeStyle.SOLID, new CornerRadii(4), BorderWidths.DEFAULT)));
 
 
         this.setCenter(titleLabel);
-
     }
 
     private void startFlashing(Circle light, int i) {

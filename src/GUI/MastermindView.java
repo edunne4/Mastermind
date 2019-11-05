@@ -70,7 +70,7 @@ public class MastermindView {
     }
 
     private void createTitle() {
-        MastermindTitle title = new MastermindTitle(300,40);
+        MastermindTitle title = new MastermindTitle(300,40, "MASTERMIND");
         VBox top = new VBox();
         top.getChildren().add(title);
 
