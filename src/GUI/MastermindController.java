@@ -164,9 +164,6 @@ public class MastermindController {
     }
 
     private void resetGame(){
-        //reset the model's game
-        //theModel.getTheGameManager().initNewGame();
-
         //reset the view's game
         BoardRowView currentRowView = theView.getBoardView().getRowViewAt(theModel.getTheGameManager().getNumTurnsPlayed());
         currentRowView.activate();
