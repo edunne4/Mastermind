@@ -71,6 +71,9 @@ public class WinnerWindow {
         root.getChildren().add(new HBox(20,quitButton,playAgainButton));
     }
 
+    /**
+     * Set up handlers for the game over buttons
+     */
     private void eventHandlers() {
         quitButton.setOnMouseClicked(event -> System.exit(0));
 

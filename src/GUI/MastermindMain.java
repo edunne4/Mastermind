@@ -4,6 +4,9 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * The main mastermind game application
+ */
 public class MastermindMain extends Application {
 
 private MastermindController theController;

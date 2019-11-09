@@ -24,6 +24,9 @@ import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the board display
+ */
 public class BoardView extends VBox {
 
     /** All row views in the board */

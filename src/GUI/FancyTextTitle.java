@@ -31,6 +31,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
 
+/**
+ * Fancy text for the title of the game
+ */
 public class FancyTextTitle extends BorderPane {
 
     private final static int LIGHT_SPACING = 5;

@@ -25,14 +25,24 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Circle;
 
+/**
+ * Represents a physical code peg holder on a game board with the capability to hold and display a code peg GUI object
+ */
 public class CodePegHolderView extends StackPane {
 
+    /** The row of the the board this is in (optional) */
     private BoardRowView rowThisIsIn = null;
+
+    /** The current GUI peg view held by this peg holder */
     private CodePegView currentPeg;
 
+    /** whether or not the code peg holder is selected by the user */
     private SimpleBooleanProperty isSelected = new SimpleBooleanProperty(false);
 
 
+    /**
+     * Initialize the the hole view
+     */
     public CodePegHolderView() {
         super();
         //create empty black circle
@@ -51,7 +61,9 @@ public class CodePegHolderView extends StackPane {
     }
 
     /**
-     * Creates a StackPane layout with default CENTER alignment.
+     * Create a peg holder with a Code peg in it
+     * @param newPeg the peg that should be in the peg holder
+     * @param rowThisIsIn the row view that this code peg holder belongs to
      */
     public CodePegHolderView(CodePegEnum newPeg, BoardRowView rowThisIsIn) {
         this();
@@ -59,10 +71,14 @@ public class CodePegHolderView extends StackPane {
         this.rowThisIsIn = rowThisIsIn;
     }
 
+    /**
+     * Assign a ScorePegView object to this peg holder to be displayed
+     * @param newPeg the peg to be set
+     */
     public void setCurrentPeg(CodePegEnum newPeg){
         setCurrentPeg(new CodePegView(newPeg));
     }
-    //TODO maybe get rid of this overload and just have the one that accepts the enum as parameter
+
     public CodePegEnum setCurrentPeg(CodePegView newPegView) {
         //return the previous peg type held here if it is not null
         CodePegEnum oldPeg = (currentPeg != null) ? currentPeg.getPegType() : CodePegEnum.NONE;
@@ -78,10 +94,12 @@ public class CodePegHolderView extends StackPane {
         return  oldPeg;
     }
 
+
+    /**
+     * Make the peg appear selected
+     */
     public void select(){
         this.isSelected.setValue(true);
-        //super.setStroke(Color.BLACK); //TODO - change this color value to a binding
-        //super.setStrokeWidth(4);
         currentPeg.setRadius(CodePegView.PEG_RADIUS *CodePegView.PEG_SELECTED_SCALE_FACTOR);
 
         //set the specular color to WHITE
@@ -90,9 +108,12 @@ public class CodePegHolderView extends StackPane {
         material.setSpecularColor(Color.WHITE);
         currentPeg.setMaterial(material);
     }
+
+    /**
+     * Make the peg appear deselected
+     */
     public void deselect(){
         this.isSelected.setValue(false);
-        //this.setStroke(Color.TRANSPARENT);
         currentPeg.setRadius(CodePegView.PEG_RADIUS);
 
         //set the specular color back to DARKGRAY

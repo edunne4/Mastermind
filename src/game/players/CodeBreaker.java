@@ -45,5 +45,13 @@ public abstract class CodeBreaker {
     public abstract void playGuessOnBoard(int row);
 
 
-    public abstract void playThisGuessOnBoard(int row, String sGuess);
+
+    /**
+     * Update the board with a specific guess
+     * @param row the row index of the row to update
+     * @param sGuess the guess to update the row with
+     */
+    public void playThisGuessOnBoard(int row, String sGuess){
+        theBoard.getCodeAt(row).update(sGuess);
+    }
 }

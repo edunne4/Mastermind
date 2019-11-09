@@ -112,9 +112,6 @@ public class GameManager {
         return currentRowBeingPlayed + 1;
     }
 
-    public int getCurrentRowBeingPlayed() {
-        return currentRowBeingPlayed;
-    }
 
     /**
      * Performs the heavy work of orchestrating everything that needs to happen to ensure ONE turn is executed
@@ -150,6 +147,11 @@ public class GameManager {
     }
 
 
+    /**
+     * This method is similar to playNextTurn but with specific guess parameter that can be called by the rest of the MVC
+     * @param sGuess the guess to use on the next turn
+     * @return the current game state
+     */
     public GameState playNextTurnWithGuess(String sGuess) {
         currentRowBeingPlayed++;
 
@@ -172,10 +174,16 @@ public class GameManager {
     }
 
 
+    /**
+     * @return the board object that is currently being played
+     */
     public Board getTheBoard() {
         return theBoard;
     }
 
+    /**
+     * @return the score of the current row being played
+     */
     public Score getCurrentScore() {
         return theBoard.getScoreAt(currentRowBeingPlayed);
     }

@@ -47,6 +47,7 @@ public class LoserWindow {
     /** the secret code pegs that will be displayed to the user **/
     BoardRowView winningPegs;
 
+    /** Initialize all components of the scene graph */
     public LoserWindow() {
 
         //setup the root as a VBox, add a FancyTextTitle and set the background parameters
@@ -62,6 +63,9 @@ public class LoserWindow {
 
     }
 
+    /**
+     * Display what the secret code was
+     */
     private void createCodeReveal() {
         HBox codeReveal = new HBox(20);
         codeReveal.setAlignment(Pos.CENTER);
@@ -74,12 +78,18 @@ public class LoserWindow {
         root.getChildren().add(codeReveal);
     }
 
+    /**
+     * create endgame buttons
+     */
     private void createButtons() {
         quitButton = new Button("Close");
         playAgainButton = new Button("Play again");
         root.getChildren().add(new HBox(20,quitButton,playAgainButton));
     }
 
+    /**
+     * create root
+     */
     private void setupRoot() {
         root = new VBox(20);
         root.getChildren().add(new FancyTextTitle(300,100, "YOU LOST"));
@@ -87,6 +97,9 @@ public class LoserWindow {
         root.setPadding(new Insets(15));
     }
 
+    /**
+     * Set up end game options
+     */
     private void eventHandlers() {
         quitButton.setOnMouseClicked(event -> System.exit(0));
 

@@ -14,6 +14,7 @@ public enum ScorePegEnum {
     /** The individual character to represent each scoring peg */
     private String s;
 
+    /** The color associated with this score peg */
     private Color color;
 
     private ScorePegEnum(String s, Color color) { this.s = s; this.color = color; }

@@ -21,6 +21,9 @@ package game.players;
 import game.board.Board;
 import game.code.Code;
 
+/**
+ * Represent a code maker that the GUI uses to generate the secret code
+ */
 public class GUICodeMaker extends CodeMaker{
 
     /**
@@ -35,7 +38,7 @@ public class GUICodeMaker extends CodeMaker{
     /**
      * Instruct the codeMaker to score the latest guess that is on the board
      *
-     * @param row
+     * @param row the row with the the code to score
      */
     @Override
     public void scoreGuessOnBoard(int row) {

@@ -23,6 +23,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+/**
+ * Represents a physical score peg holder on a game board with the capability to hold and display a score peg GUI object
+ */
 public class ScorePegHolderView extends StackPane {
 
     private static final double INIT_RADIUS = 5;
@@ -47,11 +50,19 @@ public class ScorePegHolderView extends StackPane {
         setCurrentPeg(newPeg);
     }
 
+    /**
+     * Set the current peg type in the peg holder to be displayed
+     * @param newPeg the peg to be set
+     */
     public void setCurrentPeg(ScorePegEnum newPeg){
         setCurrentPeg(new ScorePegView(newPeg));
     }
 
 
+    /**
+     * Assign a ScorePegView object to this peg holder to be displayed
+     * @param newPegView the peg to be set
+     */
     public void setCurrentPeg(ScorePegView newPegView) {
 
         //remove the old peg

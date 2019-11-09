@@ -59,8 +59,6 @@ public class Board {
 
     public int getNumRows() { return this.numRows; }
     public int getNumPegs() { return this.numPegs; }
-//    public void setNumRows(int numRows) { this.numRows = numRows; }
-//    public void setNumPegs(int numPegs) { this.numPegs = numPegs; }
 
     /**
      * Remove all pegs on the board, by iterating through every row and removing their rows

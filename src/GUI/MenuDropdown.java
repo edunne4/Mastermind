@@ -28,6 +28,9 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 
+/**
+ * Configuration Menu
+ */
 public class MenuDropdown extends MenuBar {
 
     private MenuBar menuBar;
@@ -37,6 +40,9 @@ public class MenuDropdown extends MenuBar {
     private final Menu numTurns;
     private final Menu numPegs;
 
+    /**
+     * Construct a new Config menu
+     */
     public MenuDropdown() {
         this.menuBar = new MenuBar();
 

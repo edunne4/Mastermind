@@ -18,10 +18,11 @@
  */
 package game.players;
 
-import GUI.View.BoardView;
 import game.board.Board;
-import game.code.Code;
 
+/**
+ * represents the codebreaker that the GUI uses to make guess on the model board
+ */
 public class GUICodeBreaker extends CodeBreaker {
 
     /**
@@ -34,7 +35,8 @@ public class GUICodeBreaker extends CodeBreaker {
     }
 
     /**
-     *
+     * Unused method because GUI View package determines what guess to make, and this codebreaker is part of the model,
+     * which does not have access to the view package
      *
      * @param row is the row that the CodeBreaker must play a move on
      */
@@ -47,13 +49,5 @@ public class GUICodeBreaker extends CodeBreaker {
         theBoard.getCodeAt(row).update("1234");
     }
 
-    /**
-     * Update the board with a specific guess
-     * @param row the row index of the row to update
-     * @param sGuess the guess to update the row with
-     */
-    @Override
-    public void playThisGuessOnBoard(int row, String sGuess){
-        theBoard.getCodeAt(row).update(sGuess);
-    }
+
 }

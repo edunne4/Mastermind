@@ -34,6 +34,9 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the display for one row in a the game board
+ */
 public class BoardRowView extends HBox {
     /**
      * Possible states that the row can be in
@@ -74,11 +77,11 @@ public class BoardRowView extends HBox {
     public BoardRowView(int numPegs) {
         this(new RowOnBoard(numPegs));
     }
+
     /**
      * Explicit constructor for showing a specific row
      * @param row the row to show
      */
-
     public BoardRowView(RowOnBoard row) {
         scoreRow = new HBox(10);
         pegRow = new HBox(10);

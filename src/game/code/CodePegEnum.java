@@ -33,8 +33,10 @@ public enum CodePegEnum {
     ORANGE("6", Color.ORANGE);
 
     private String symbol;
+    /** The color associated with this code peg */
     private Color color;
 
+    /** Constructor to initialize symbol and color associated */
     private CodePegEnum(String symbol, Color color) {
         this.symbol = symbol;
         this.color = color;

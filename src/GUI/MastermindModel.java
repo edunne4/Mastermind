@@ -24,6 +24,9 @@ import game.board.Board;
 import game.players.*;
 import game.score.Score;
 
+/**
+ * The model part of the MVC design pattern, controlling much of the game data
+ */
 public class MastermindModel {
 
     /** Standard Mastermind has 12 guesses allowed */
@@ -44,6 +47,11 @@ public class MastermindModel {
         createNewGame(DEFAULT_NUMBER_TURNS, DEFAULT_CODE_SIZE);
     }
 
+    /**
+     * Create a new game with the correct sized board
+     * @param numTurns the number of rows in the board
+     * @param numPegs the number of pegs in the secret code
+     */
     public void createNewGame(int numTurns, int numPegs){
         // Set up our board to be used between teh codemaker and codebreaker
         Board theBoard = new Board(numTurns, numPegs);
@@ -65,6 +73,11 @@ public class MastermindModel {
     }
 
 
+    /**
+     * take a turn in the game and return the score of that guess
+     * @param sGuess the guess to use in the turn
+     * @return the score of that guess
+     */
     public Score makeGuess(String sGuess) {
         theGameManager.playNextTurnWithGuess(sGuess);
         return theGameManager.getCurrentScore();

@@ -3,7 +3,7 @@
  * Fall 2019
  * Instructor: Prof. Brian King
  *
- * Name: Ryan Bailis
+ * Name: Ryan Bailis and Ethan Dunne
  * Section: MWF 11am
  * Instructor: Professor Brian King
  * Date: 10/29/19
@@ -24,11 +24,15 @@ import game.code.CodePegEnum;
 import game.score.Score;
 import javafx.scene.control.MenuItem;
 
+/**
+ * The controller of the MVC for this game, connecting the view with the model
+ */
 public class MastermindController {
 
     private MastermindView theView;
     private MastermindModel theModel;
 
+    /** The type of peg that is currently selected */
     private CodePegEnum selectedPeg = CodePegEnum.NONE;
 
 
@@ -163,7 +167,7 @@ public class MastermindController {
                 //get game ready to be played again with the new number of pegs
                 theView.activateRow(theModel.getTheGameManager().getNumTurnsPlayed());
 
-                //recreate eventhandlers for all pegs
+                //recreate event handlers for all pegs
                 pegEventHandlers();
                 //doScrollPaneBindings();
 

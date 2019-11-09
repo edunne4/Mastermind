@@ -20,11 +20,13 @@
 package GUI.View;
 
 import game.code.CodePegEnum;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Sphere;
 
+/**
+ * Display class for a code peg
+ */
 public class CodePegView extends Sphere {
 
     /** The size of the peg in the view */

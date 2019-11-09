@@ -3,7 +3,7 @@
  * Fall 2019
  * Instructor: Prof. Brian King
  *
- * Name: Ryan Bailis
+ * Name: Ryan Bailis and Ethan Dunne
  * Section: MWF 11am
  * Instructor: Professor Brian King
  * Date: 10/29/19
@@ -37,6 +37,9 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The main view part of the MVC design, which handles setting up the GUI
+ */
 public class MastermindView {
 
     private final MastermindModel theModel;
@@ -58,6 +61,9 @@ public class MastermindView {
         initSceneGraph();
     }
 
+    /**
+     * Set up the scene graph
+     */
     private void initSceneGraph() {
         this.root = new BorderPane();
 
@@ -75,6 +81,9 @@ public class MastermindView {
         createPegsandMenu();
     }
 
+    /**
+     * Helper method to set up the title text
+     */
     private void createTitle() {
         FancyTextTitle title = new FancyTextTitle(300,45, "MASTERMIND");
         VBox top = new VBox();
@@ -85,6 +94,9 @@ public class MastermindView {
         root.setMargin(root.getTop(), new Insets(15));
     }
 
+    /**
+     * A helper method to set up the peg options and menu
+     */
     private void createPegsandMenu() {
 
         //do right pane (playing peg options)
@@ -121,6 +133,9 @@ public class MastermindView {
         root.setRight(rightPane);
     }
 
+    /**
+     * create the board area
+     */
     public void createPlayingArea() {
         scroller = new ScrollPane();
         VBox board = new VBox(20);
@@ -151,6 +166,10 @@ public class MastermindView {
         return pegOptions;
     }
 
+
+    /**
+     * display the win menu
+     */
     public void showWinMenu(){
         WinnerWindow winner = new WinnerWindow();
 
@@ -162,6 +181,9 @@ public class MastermindView {
         winnerStage.show();
     }
 
+    /**
+     * display the lose menu
+     */
     public void showLoseMenu(){
         LoserWindow loser = new LoserWindow();
 
@@ -181,12 +203,20 @@ public class MastermindView {
         return menuDropdown;
     }
 
+    /**
+     * Set a specific row as active so the user can edit the code in it
+     * @param rowIndex the index of the row to activate
+     */
     public void activateRow(int rowIndex) {
         if(rowIndex < boardView.getBoardRows().size()) {
             boardView.getBoardRows().get(rowIndex).activate();
         }
     }
 
+    /**
+     * Enable the submit guess button
+     * @param enable whether or not to allow a code guess
+     */
     public void allowGuess(boolean enable){
         submitBtn.setDisable(!enable);
     }
