@@ -14,13 +14,13 @@ package main;/* *****************************************
  * ****************************************
  */
 
-import game.GameManager;
-import game.board.Board;
-import game.code.CodePegEnum;
-import game.players.CodeBreaker;
-import game.players.CodeMaker;
-import game.players.ConsoleCodeBreaker;
-import game.players.ConsoleCodeMaker;
+import Model.GameManager;
+import Model.board.Board;
+import Model.code.CodePegEnum;
+import Model.players.CodeBreaker;
+import Model.players.CodeMaker;
+import Model.players.ConsoleCodeBreaker;
+import Model.players.ConsoleCodeMaker;
 
 import java.util.Scanner;
 

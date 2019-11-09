@@ -1,5 +1,8 @@
 package GUI;
 
+import Controller.MastermindController;
+import Model.MastermindModel;
+import View.MastermindView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
